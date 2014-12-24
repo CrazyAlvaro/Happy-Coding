@@ -1,0 +1,12 @@
+body {
+    color: #ffffff;
+    background: #413f3b url("images/bg.jpg");
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: 90%;
+    margin: 0px;
+    text-align: center;}
+a {
+    color: #b5c1ad;
+    text-decoration: none;}
+a:hover {
+    color: #ffffff;}
