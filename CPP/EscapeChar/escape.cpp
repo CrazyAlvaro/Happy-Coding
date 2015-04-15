@@ -3,11 +3,13 @@
 using namespace std;
 
 string non_escape_string() {
-    string tmp_str = "dsafdsfaabcdefg";
+    string tmp_str = "dsafdsfaabcdefgsafdfd";
     tmp_str[3] = '"';
     tmp_str[6] = '\\';
     tmp_str[7] = '"';
-    tmp_str[9] = '"';
+    tmp_str[9] = '\\';
+    tmp_str[10] = '\\';
+    tmp_str[11] = '"';
     //cout<<tmp_str<<endl;
     return tmp_str;
 }
@@ -21,10 +23,11 @@ int escape_string(string& str){
     string::iterator it = str.begin();
     while( it != str.end() ){
         switch( *it ) {
-        case '\\':                  /* backslash        */
-            escape_flag = true;
+        case '\\':
+            /* set escape_flag only if in unescaped condition */
+            escape_flag = escape_flag ? false :  true;
             break;
-        case '"':                   /* double quote     */
+        case '"':
             if(escape_flag == false){
                 it = str.insert(it, '\\');
                 it++;
