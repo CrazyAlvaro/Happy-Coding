@@ -1,13 +1,13 @@
 Log something interesting I read everyday, possibly export to my personal website later
 =======================================================================================
 
-02/11/15 
+02/11/15
 --------
 
 ###How FireBase push works?
 
 <!--  comment out
-####Words 
+####Words
   caveat: warning
 -->
 
@@ -38,3 +38,8 @@ Log something interesting I read everyday, possibly export to my personal websit
 
 ###TODO:
   write a ruby versionof source code
+
+04/02/15
+--------
+
+### I want to do a product, think about how to make a better product

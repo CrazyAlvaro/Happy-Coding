@@ -67,7 +67,7 @@ set nocompatible
 " filetype indent plugin on
 
 " Enable syntax highlighting
-" syntax on
+syntax on
 
 
 "------------------------------------------------------------
@@ -225,11 +225,11 @@ set tags=./tags,tags;
 
 
 " Setup an autocmd to update tag file when buffer write to a file
-" au BufWritePost 
+" au BufWritePost
 
 
 " working directory is always the same as the file you are editing
-set autochdir 
+set autochdir
 
 " Run pathogen
 execute pathogen#infect()
