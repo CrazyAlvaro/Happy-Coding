@@ -236,3 +236,6 @@ execute pathogen#infect()
 
 " Automatically remove all trailing whitespace before saving
 autocmd BufWritePre * :%s/\s\+$//e
+
+" Set full path show in statusline
+set statusline+=%F

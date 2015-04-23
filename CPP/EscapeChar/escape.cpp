@@ -10,6 +10,8 @@ string non_escape_string() {
     tmp_str[9] = '\\';
     tmp_str[10] = '\\';
     tmp_str[11] = '"';
+    tmp_str[12] = '"';
+    tmp_str[13] = '"';
     //cout<<tmp_str<<endl;
     return tmp_str;
 }
@@ -27,7 +29,7 @@ int escape_string(string& str){
             /* set escape_flag only if in unescaped condition */
             escape_flag = escape_flag ? false :  true;
             break;
-        case '"':
+        case '\"':
             if(escape_flag == false){
                 it = str.insert(it, '\\');
                 it++;
