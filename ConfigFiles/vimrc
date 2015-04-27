@@ -243,3 +243,6 @@ au BufNewFile,BufRead *.cl    setf cool
 
 " Syntax for hbs file as html
 au BufNewFile,BufRead *.hbs   setf html
+
+" Set full path show in statusline
+set statusline+=%F
