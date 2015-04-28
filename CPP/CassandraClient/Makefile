@@ -1,9 +1,9 @@
-CXXFILES = example_client.cpp
+CXXFILES = cassandra_client.cpp
 CC = g++
-CXXFLAGS = -Wall -o
-TARGET = cass_client
+CXXFLAGS = -Wall -g -o
+TARGET = execute_example
 LIBDIR = -L/usr/local/lib64
-LIBS = -lcassandra.1.0.1
+LIBS = -lcassandra
 
 all:
 	$(CC) $(CXXFILES) $(CXXFLAGS) $(TARGET) $(LIBDIR) $(LIBS)

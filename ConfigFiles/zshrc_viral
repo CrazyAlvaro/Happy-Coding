@@ -108,3 +108,6 @@ function gemdir {
         pwd
     fi
 }
+
+# Library search path in MAC OSX
+export DYLD_LIBRARY_PATH=/usr/local/lib:/usr/local/lib64:$DYLD_LIBRARY_PATH
