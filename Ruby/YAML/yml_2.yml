@@ -1,0 +1,7 @@
+assets:
+    adapter: mysql2
+    database: viralheat<%="#{ENV['JOB_NAME']}"%>
+    user: root
+    password: 
+    host: localhost
+    encoding: utf8

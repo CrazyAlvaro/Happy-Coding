@@ -1,0 +1,71 @@
+development:
+    adapter: mysql2
+    database: viralheat<%="#{ENV['JOB_NAME']}"%>
+    user: root
+    password:
+    host: localhost
+    encoding: utf8
+
+assets:
+    adapter: mysql2
+    database: viralheat<%="#{ENV['JOB_NAME']}"%>
+    user: root
+    password: 
+    host: localhost
+    encoding: utf8
+
+test:
+    adapter: mysql2
+    database: viralheat_test<%="#{ENV['JOB_NAME']}"%>
+    user: root
+    password: 
+    host: localhost
+    encoding: utf8
+
+data_mart_development:
+    adapter: mysql2
+    database: viralheat<%="#{ENV['JOB_NAME']}"%>
+    user: root
+    password:
+    host: localhost
+    encoding: utf8
+
+data_mart_assets:
+    adapter: mysql2
+    database: viralheat<%="#{ENV['JOB_NAME']}"%>
+    user: root
+    password:
+    host: localhost
+    encoding: utf8
+
+data_mart_test:
+    adapter: mysql2
+    database: viralheat_test<%="#{ENV['JOB_NAME']}"%>
+    user: root
+    password:
+    host: localhost
+    encoding: utf8
+
+database_other_datasets:
+    adapter: mysql2
+    database: viralheat<%="#{ENV['JOB_NAME']}"%>
+    user: root
+    password: qswintech
+    host: 192.168.8.210
+    encoding: utf8
+
+database_stats:
+    adapter: mysql2
+    database: viralheat<%="#{ENV['JOB_NAME']}"%>
+    user: root
+    password: qswintech
+    host: 192.168.8.210
+    encoding: utf8
+
+monitoring:
+    adapter: mysql2
+    database: monitoring<%="#{ENV['JOB_NAME']}"%>
+    user: root
+    password: qswintech
+    host: 192.168.8.211
+    encoding: utf8
