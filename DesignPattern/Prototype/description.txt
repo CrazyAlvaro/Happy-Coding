@@ -1,0 +1,1 @@
+Make a prototype, and accept different type of objects results in different actions towards that specific objects.

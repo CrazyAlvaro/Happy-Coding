@@ -153,4 +153,79 @@ Function.method('curry', function () {
   return function () {
     return that.apply(null, args.concat(arguments));
   };
-}); // something isn't right
+}); // something isn't right arguments is not an array
+
+Function.method('curry', function () {
+  var slice = Array.prototype.slice,
+      args = slice.apply(arguments),
+      that = this;
+  return function () {
+    return that.apply(null, args.concat(slice.apply(arguments)));
+  };
+});
+
+/*****************************************
+ *
+ *  Memoization
+ *
+ *****************************************/
+
+// compute fibonacci numbers, other then use recursive call, storing numbers has been computed
+document.writeln("Computing Fibonacci Numbers");
+
+// recursive way
+var fibonacci = function (n) {
+  return n < 2 ? n : fibonacci(n-1) + fibonacci(n-2);
+};
+
+// my code
+// var fibonacci = function (n) {
+//   var numbers = [1,2];  // array to store numbers
+//   var fab = function(numbers, n) {
+//     num = typeof numbers[n] === number ? numbers[n] : fab(numbers, n-1) + fab(numbers, n-2);
+//     numbers[n] = num;
+//   };
+//   fab(numbers, n);
+// };
+
+//memoization way, also hide memo in a closure
+var fibonacci = (function () {
+  var memo = [0,1];
+  var fib = function (n) {
+    var result = memo[n];
+    if (typeof result !== 'number') {
+      result = fib(n - 1) + fib(n - 2);
+      memo[n] = result;
+    }
+    return result;
+  };
+  return fib;
+}());
+
+
+// Generalize this Memoization
+var memoizer = function (memo, formula) {
+  var recur = function (n) {
+    var result = memo[n];
+    if (typeof result !== 'number') {
+      result = formula(recur, n);
+      memo[n] = result;
+    }
+    return result;
+  };
+  return recur;
+};
+
+// Fabonacci number
+var fibonacci = memoizer([0,1], function (recur, n) {
+  return recur(n - 1) + recur(n - 2);
+});
+
+
+for (var i = 0; i <= 40; i += 1) {
+  document.writeln('//' + i + ': ' + fibonacci(i));
+}
+
+var factorial = memoizer([1,1], function (recur, n) {
+    return n * recur(n - 1);
+});
