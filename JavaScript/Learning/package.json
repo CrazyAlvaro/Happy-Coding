@@ -1,0 +1,25 @@
+{
+  "devDependencies": {
+    "eslint": "^0.18.0"
+  },
+  "name": "Learning",
+  "version": "1.0.0",
+  "description": "Learning JavaScript from scratch",
+  "main": "run",
+  "dependencies": {
+    "eslint": "^0.18.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CrazyAlvaro/Everyday-Coding"
+  },
+  "author": "Yechen Huang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CrazyAlvaro/Everyday-Coding/issues"
+  },
+  "homepage": "https://github.com/CrazyAlvaro/Everyday-Coding"
+}

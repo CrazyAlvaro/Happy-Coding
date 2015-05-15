@@ -222,10 +222,53 @@ var fibonacci = memoizer([0,1], function (recur, n) {
 });
 
 
-for (var i = 0; i <= 40; i += 1) {
+for (var i = 0; i <= 4; i += 1) {
   document.writeln('//' + i + ': ' + fibonacci(i));
 }
 
 var factorial = memoizer([1,1], function (recur, n) {
     return n * recur(n - 1);
 });
+
+
+/*****************************************
+ *
+ *  Method
+ *
+ *****************************************/
+
+// Array reduce
+//  The reduce() method applies a function against an accumulator and each value of the array
+
+// for loop to compute the sum of an array
+var total = 0;
+var numbers = [1, 5, 7, 3, 8, 9];
+for ( var i = 0; i < numbers.length; i++ ){
+  total += numbers[i];
+}
+
+document.writeln("\nTotal value using for loop is:" + total);
+
+// using reduce method:
+// callback( previousValue(last invocation of the callback), currentValue, index, array )
+var sum = numbers.reduce( function(total, num){ return total + num }, 0); // 0 is initial value, optional
+document.writeln("\nTotal value using reduce method is:" + sum);
+
+
+// for loop concat an array of string
+var message = "";
+var words = ["reducing", "is", "simple"];
+for ( var i = 0; i < words.length; i++ ){
+  message += words[i];
+}
+document.writeln("\nMessage using for loop is:" + message);
+
+var line = words.reduce( function(build_line, word) { return build_line + word; } );
+document.writeln("\nMessage using reduce is:" + line);
+
+// Faltten an array of arrays
+var flattened = [[0, 1], [2, 3], [4, 5]].reduce( function(previousValue, currentValue) {
+  return previousValue.concat(currentValue);    // using array concat method
+});
+document.writeln("\nFlatten array is:" + flattened);
+
