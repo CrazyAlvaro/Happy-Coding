@@ -272,3 +272,155 @@ var flattened = [[0, 1], [2, 3], [4, 5]].reduce( function(previousValue, current
 });
 document.writeln("\nFlatten array is:" + flattened);
 
+/***************************************************
+ * method: map
+ * Description: creates a new array with the results of calling a provided function on every element in this array
+ * array.map(callback[, thisArg])
+ * Parameters: callback( currentValues, index, array)
+ ***************************************************/
+
+
+// Example: mapping an array of numbers to an array of square roots
+var numbers = [1, 4, 9];
+var roots = numbers.map(Math.sqrt);
+document.writeln("\nnumbers are:" + numbers + " roots of numbers are:" + roots);
+
+// Example: reformat objects in an array
+var kvArray = [{key:1, value:10}, {key:2, value:20}, {key:3, value: 30}];
+var reformattedArray = kvArray.map(function(obj) {
+  var rObj = {};
+  rObj[obj.key] = obj.value;
+  return rObj;
+});
+
+document.writeln("\n ##TODO##: print object \n kvArray are:" +
+    JSON.stringify(kvArray) + "\n reformattedArray are:" + JSON.stringify(reformattedArray));
+
+// Example: reverse a string using map
+var str = '123456';
+var values = [].map.call(str, function(x) {     /* TODO: understand why call bind str as this to map function */
+  return x;
+}).reverse().join('');
+document.writeln("\n reverse str of: " + str + " is: " + values);
+
+var numberArray = ['1', '2', '3'];
+var result = numberArray.map(parseInt);
+// actual result is [1, NaN, NaN]
+// Array.prototype.map passes 3 arguments:
+// the element, the index, the array
+// The third argument is ignored by parseInt, but not the second one,
+// hence the possible confusion.
+document.writeln("\n result of parseInt of " + numberArray + " is: " + result);
+
+function returnInt(element) {
+  return parseInt(element, 10);
+}
+var result = numberArray.map(returnInt);
+document.writeln("\n result of parseInt of " + numberArray + " is: " + result);
+
+// implementation of the map function
+
+if(Array.prototype.map) {
+
+  Array.prototype.map = function(callback, thisArg) {
+
+//    //  check thisArg is typeof Array
+//    if(thisArg.isArray) {
+//      throw("type error");
+//    }
+//
+//    //  for each element, call callback, concat with new array, return
+//    var result = [];
+//    for( var i = 0; i < thisArg.length; i++ ) {
+//      result.concat( callback(thisArg[i], i, thisArg) )
+//    }
+//    return result
+
+    var T, A, k;  //TODO: change variable name to make more sense
+
+    if(this == null) {    //TODO: different between '==' and '==='
+      throw new TypeError(' this is null or not defined');
+    }
+
+    var O = Object(this);
+
+    var len = O.length >>> 0;   //TODO: what's this?
+
+    if (typeof callback !== 'function') {
+      throw new TypeError(callback + ' is not a function');
+    }
+
+    if (arguments.length > 1) {
+      T = thisArg;
+    }
+
+    A = new Array(len);   //TODO: what's this
+
+    k = 0;
+
+    while (k < len) {
+      var kValue, mappedValue;
+
+      if (k in O) {
+        kValue = O[k];
+
+        mappedValue = callback.call(T, kValue, k, O);
+
+        A[k] = mappedValue;
+      }
+      k++;
+    }
+
+    return A;
+  }
+}
+
+// or just do this, test
+console.log(numberArray.map(Number));
+
+/***************************************************
+ * method: filter
+ * creates a new array with all elements that pass the test implemented by the provided function
+ * array.filter(callback[, thisArg])
+ ***************************************************/
+
+// example: filtering out all small values
+function isBigEnough(value) {
+  return value >= 10;
+}
+var filtered = [12, 5, 8, 130, 44].filter(isBigEnough);
+
+// Filtering invalid entries from JSON
+var arr = [
+  { id: 15 },
+  { id: -1},
+  { id: 0},
+  { id: 12.2},
+  { },
+  { id: null },
+  { id: NaN },
+  { id: 'undefined' }
+];
+
+var invalidEntries = 0;
+
+function filterByID(obj) {
+  if ('id' in obj && typeof(obj.id) === 'number' && !isNaN(obj.id)) {
+    return true;
+  } else {
+    invalidEntries++;
+    return false;
+  }
+}
+
+var arrByID = arr.filter(filterByID)    // pass a filter callback function to filter the array elments
+document.writeln("\n" + JSON.stringify(arrByID));
+
+// method: some
+
+// method: every
+
+// JSON stringify and JSON parse
+
+
+// JavaScript bind(), call(), apply()
