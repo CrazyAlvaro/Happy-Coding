@@ -15,9 +15,13 @@ Function.prototype.method = function (name, func) {
   return this;
 };
 
+// printf wrapper of document.writeln
+var printf = function(str) {
+  document.writeln(str);
+}
 //document.writeln('Hello, world');
 
-/******************** CHAPTER 5 Inheritance ********************/
+printf("\n/******************** CHAPTER 5 Inheritance ********************/\n");
 
 function simpleCall(){
   //"use strict";
@@ -31,6 +35,8 @@ simpleCall();
  * Closure
  *
  *****************************************/
+
+printf("\n==================== Closure ====================\n");
 /*
 // Fade example
 var fade = function (node) {
@@ -89,6 +95,8 @@ var add_the_handlers = function (nodes) {
  *
  *****************************************/
 
+printf("\n==================== Module ====================\n");
+
 String.method("deentityify", function(){
   // The entity table. It maps entity names to characters
 
@@ -145,6 +153,7 @@ document.writeln(unique);
  *
  *****************************************/
 
+printf("\n==================== Curry ====================\n");
 // var add1 = add.curry(1);
 // document.writeln(add1(5));  // 6
 
@@ -170,6 +179,7 @@ Function.method('curry', function () {
  *
  *****************************************/
 
+printf("\n==================== Memoization ====================\n");
 // compute fibonacci numbers, other then use recursive call, storing numbers has been computed
 document.writeln("Computing Fibonacci Numbers");
 
@@ -240,6 +250,7 @@ var factorial = memoizer([1,1], function (recur, n) {
 // Array reduce
 //  The reduce() method applies a function against an accumulator and each value of the array
 
+printf("\n==================== Array.reduce()====================\n");
 // for loop to compute the sum of an array
 var total = 0;
 var numbers = [1, 5, 7, 3, 8, 9];
@@ -279,7 +290,7 @@ document.writeln("\nFlatten array is:" + flattened);
  * Parameters: callback( currentValues, index, array)
  ***************************************************/
 
-
+printf("\n==================== Array.map()====================\n");
 // Example: mapping an array of numbers to an array of square roots
 var numbers = [1, 4, 9];
 var roots = numbers.map(Math.sqrt);
@@ -293,7 +304,7 @@ var reformattedArray = kvArray.map(function(obj) {
   return rObj;
 });
 
-document.writeln("\n ##TODO##: print object \n kvArray are:" +
+document.writeln("\n print object \n kvArray are:" +
     JSON.stringify(kvArray) + "\n reformattedArray are:" + JSON.stringify(reformattedArray));
 
 // Example: reverse a string using map
@@ -336,42 +347,42 @@ if(Array.prototype.map) {
 //    }
 //    return result
 
-    var T, A, k;  //TODO: change variable name to make more sense
+    var thisValue, newArray, index;
 
-    if(this == null) {    //TODO: different between '==' and '==='
+    if(this == null) {    //different between '==' and '===': loos equality, not check type, strict equality
       throw new TypeError(' this is null or not defined');
     }
 
-    var O = Object(this);
+    var arrayObject = Object(this);
 
-    var len = O.length >>> 0;   //TODO: what's this?
+    var len = arrayObject.length >>> 0;   // zero-fill right shift, shift in zeros from the left
 
     if (typeof callback !== 'function') {
       throw new TypeError(callback + ' is not a function');
     }
 
     if (arguments.length > 1) {
-      T = thisArg;
+      thisValue = thisArg;
     }
 
-    A = new Array(len);   //TODO: what's this
+    newArray = new Array(len);    // create a new array with size len
 
-    k = 0;
+    index = 0;
 
-    while (k < len) {
+    while (index < len) {
       var kValue, mappedValue;
 
-      if (k in O) {
-        kValue = O[k];
+      if (index in arrayObject) {
+        kValue = arrayObject[index];
+        // callback function accepts currentValue, index, array
+        mappedValue = callback.call(thisValue, kValue, index, arrayObject);
 
-        mappedValue = callback.call(T, kValue, k, O);
-
-        A[k] = mappedValue;
+        newArray[index] = mappedValue;
       }
-      k++;
+      index++;
     }
 
-    return A;
+    return newArray;
   }
 }
 
@@ -384,6 +395,7 @@ console.log(numberArray.map(Number));
  * array.filter(callback[, thisArg])
  ***************************************************/
 
+printf("\n==================== Array.filter()====================\n");
 // example: filtering out all small values
 function isBigEnough(value) {
   return value >= 10;
@@ -416,11 +428,182 @@ function filterByID(obj) {
 var arrByID = arr.filter(filterByID)    // pass a filter callback function to filter the array elments
 document.writeln("\n" + JSON.stringify(arrByID));
 
-// method: some
+/***************************************************
+ * method: some
+ * Tests some element in the array passes the test implemented by the provided function
+ * array.some(callback[, thisArg])
+ ***************************************************/
 
-// method: every
+printf("\n==================== Array.some()====================\n");
+// example: Testing value of array elements
+function isBiggerThan10(element, index, array) {
+  return element > 10;
+}
+var tArray1 =[2, 5, 8, 1, 4];
+var tArray2 =[12, 5, 8, 1, 4];
+document.writeln("[" + tArray1.toString() + "].some(isBiggerThan10) " + tArray1.some(isBiggerThan10));
+document.writeln("[" + tArray2.toString() + "].some(isBiggerThan10) " + tArray2.some(isBiggerThan10));
 
-// JSON stringify and JSON parse
+
+/***************************************************
+ * method: every
+ * Tests whether all elements in the array pass the test implemented by the provided function
+ * array.every(callback[, thisArg])
+ ***************************************************/
+printf("\n==================== Array.every()====================\n");
+function isBigEnough(element, index, array) {
+  return element >= 10;
+}
+
+var array1 = [12, 54, 18, 130,44];
+document.writeln(array1.every(isBigEnough));
+
+// or using arrow functions
+//document.writeln(array1.every(elem => elem >= 10)); // not support by chrome yet
+
+/***************************************************
+ * JSON
+ * method: stringify
+ * converts a JavsScript value to a JSON string, optionally
+ * replacing values if a replacer function is specified,
+ * or optionally including only the specified properties
+ * if a replacer array is specified.
+ *
+ * JSON.stringify(value[, replacer[, space]])
+ ***************************************************/
+
+printf("\n==================== JSON.stringify()====================\n");
+printf("{}" + JSON.stringify({}));
+
+// replacer example
+var foo = {foundation: "Mozilla", model: "box", week: 45, transport: "car", month: 7};
+printf(JSON.stringify(foo));
+
+function replacerString(key, value) {
+  if (typeof value === "string") {
+    return undefined;   // discard value type if string
+  }
+  return value;
+}
+
+printf(JSON.stringify(foo, replacerString));
+
+// example with an array
+printf(JSON.stringify(foo, ['week', 'month']));   // only keep 'week', 'month' properties
+
+// using ' or ", another as literal
+printf("Say 'Hello'");
+printf('Say "Hello"');
+
+printf(JSON.stringify({a: 2}));
+printf(JSON.stringify({a: 2}, null, ' '));
+
+printf(JSON.stringify({uno: 1, dos: 2}));
+printf(JSON.stringify({uno: 1, dos: 2}, null, ' '));
 
 
-// JavaScript bind(), call(), apply()
+// toJSON() behavior
+var obj = {
+  foo: 'foo',
+  toJSON: function() {    // only the invocation of this function will be serialized
+    return 'bar';
+  }
+};
+printf(JSON.stringify(obj));
+printf(JSON.stringify({x: obj}));
+
+/***************************************************
+ * JSON
+ * method: parse
+ * parses a string as JSON, optionally transforming
+ * the value produced by parsing
+ ***************************************************/
+printf("\n==================== JSON.parse()====================\n");
+printf(JSON.parse('{}'));
+printf(JSON.parse('[1, 5, "false"]'));
+
+/***************************************************
+ * method: bind
+ * creates a new function that, when called, has its this keyword
+ * set to the provided value, with a given sequence of arguments
+ * preceding any provided when the new function is called.
+ * fun.bind(thisArg[, arg1[, arg2[, ...]]])
+ ***************************************************/
+printf("\n==================== bind()====================\n");
+
+// Example: creating a bound function
+this.x = 9;
+var module = {
+  x: 91,
+  getX: function() { return this.x; }
+};
+
+printf(module.getX());
+
+var getX = module.getX;
+printf(getX()); // 9, because a new function with 'this' bound to module
+
+var boundGetX = getX.bind(module);
+printf(boundGetX());
+
+/***************************************************
+ * method: call
+ * Calls a function with a given 'this' value and arguments
+ * provided individually.
+ * fun.call(thisArg[, arg1[, arg2[, ...]]])
+ ***************************************************/
+printf("\n==================== call()====================\n");
+// Example: Using call to chain constructors for an object
+
+function Product(name, price) {
+  this.name = name;
+  this.price = price;
+
+  if (price < 0) {
+    throw RangeError('Cannot create product ' +
+                      this.name + ' with a negative price');
+  }
+
+  return this;
+}
+
+function Food(name, price) {
+  Product.call(this, name, price);
+  this.category = 'food';
+}
+
+Food.prototype = Object.create(Product.prototype);    //TODO: what fun.prototype means ?
+
+function Toy(name, price) {
+  Product.call(this, name, price);
+  this.category = 'toy';
+}
+
+Toy.prototype = Object.create(Product.prototype);
+
+var cheese = new Food('feta', 5);
+var fun = new Toy('robot', 40);
+
+
+// Example: Using call to invoke an anonymous function TODO: use reduce function other than for
+var animals = [
+  { species: 'Lion', name: 'King' },
+  { species: 'Whale', name: 'Fail'}
+];
+
+for (var i = 0; i < animals.length; i++) {
+  (function(i) {
+    this.print = function() {
+      printf('#' + i + ' ' + this.species
+                  + ': ' + this.name);
+    }
+    this.print();
+  }).call(animals[i], i);
+}
+
+/***************************************************
+ * method: apply
+ *
+ *
+ ***************************************************/
+printf("\n==================== apply()====================\n");
