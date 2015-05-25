@@ -92,6 +92,8 @@ alias cd5="cd ../../../../../"
 alias rm="rm -i"
 alias cd_reporter="cd ~/Dev/reporter/src/main/java/com/viralheat/reporter/"
 
+alias grep="grep --exclude=tags"
+
 # RVM
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
