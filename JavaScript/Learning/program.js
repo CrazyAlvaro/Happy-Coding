@@ -10,6 +10,7 @@
  * object created by the constructor function on which you called method.
  *
  */
+
 Function.prototype.method = function (name, func) {
   this.prototype[name] = func;    // 'this' is a reference to the object on which the method was called.
   return this;
@@ -532,7 +533,7 @@ printf(JSON.parse('[1, 5, "false"]'));
 printf("\n==================== bind()====================\n");
 
 // Example: creating a bound function
-this.x = 9;
+var x = 9;
 var module = {
   x: 91,
   getX: function() { return this.x; }
@@ -541,7 +542,7 @@ var module = {
 printf(module.getX());
 
 var getX = module.getX;
-printf(getX()); // 9, because a new function with 'this' bound to module
+//printf(getX()); // 9, because a new function with 'this' bound to module
 
 var boundGetX = getX.bind(module);
 printf(boundGetX());
@@ -607,3 +608,49 @@ for (var i = 0; i < animals.length; i++) {
  *
  ***************************************************/
 printf("\n==================== apply()====================\n");
+
+
+
+/***************************************************
+ * method: later
+ *
+ *
+ ***************************************************/
+
+
+printf("\n/******************** ECMAScript 6 ********************/\n");
+
+
+/***************************************************
+ * Arrows: function
+ * Different than function, share the same 'this'
+ *
+ ***************************************************/
+printf("\n==================== Arrows ====================\n");
+// Expression bodies
+var evens = [2, 4, 6];
+var odds = evens.map(v => v + 1);
+var nums = evens.map((v, i) => v + i);
+
+printf(odds);
+printf(nums);
+
+// Statement bodies
+nums.forEach(v => {
+  if (v % 5 === 0)
+    fives.push(v);
+});
+
+// lexical this
+var bob = {
+  _name: "Bob",
+  _friends: ["Yechen"],
+  printfFriends() {
+    this._friends.forEach(f =>
+        printf(this._name + " knows " + f));   // "this" is the same as the function
+  }
+}
+
+
+printf("\n==================== Classes ====================\n");
+

@@ -1,5 +1,6 @@
 {
   "devDependencies": {
+    "babel-core": "^5.4.7",
     "eslint": "^0.18.0"
   },
   "name": "Learning",
