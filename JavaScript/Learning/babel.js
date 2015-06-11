@@ -1,5 +1,11 @@
 "use strict";
 
+var _get = function get(_x3, _x4, _x5) { var _again = true; _function: while (_again) { var object = _x3, property = _x4, receiver = _x5; desc = parent = getter = undefined; _again = false; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x3 = parent; _x4 = property; _x5 = receiver; _again = true; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
+
 function _defineProperty(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); }
 
 var printf = function printf(object) {
@@ -120,7 +126,7 @@ function f4() {
 }
 
 /***************************** Iterators + For..Of ********************/
-
+//TODO: not understand how this works
 var fibonacci = _defineProperty({}, Symbol.iterator, function () {
   var pre = 0,
       cur = 1;
@@ -147,21 +153,6 @@ try {
     if (n > 1000) break;
     console.log(n);
   }
-
-  // include Babel polyfill to use Iterators
-
-  //interface IteratorResult {
-  //  done: boolean;
-  //  value: any;
-  //}
-  //
-  //interface Iterator {
-  //  next(): IteratorResult;
-  //}
-  //
-  //interface Iterable {
-  //  [Symbol.iterator](): Iterator
-  //}
 } catch (err) {
   _didIteratorError = true;
   _iteratorError = err;
@@ -176,4 +167,123 @@ try {
     }
   }
 }
+
+// include Babel polyfill to use Iterators
+
+//interface IteratorResult {
+//  done: boolean;
+//  value: any;
+//}
+//
+//interface Iterator {
+//  next(): IteratorResult;
+//}
+//
+//interface Iterable {
+//  [Symbol.iterator](): Iterator
+//}
+
+/***************************** Generators ********************/
+//TODO: again no idea
+//var fibonacci = {
+//  [Symbol.iterator]: function*() {
+//    var pre = 0, cur = 1;
+//    for (;;) {
+//      var temp = pre;
+//      pre = cur;
+//      cur += temp;
+//      yield cur;
+//    }
+//  }
+//}
+//
+//for (var n of fibonacci) {
+//  // truncate the sequence at 1000
+//  if (n > 1000)
+//    break;
+//  console.log(n);
+//}
+
+/***************************** Comprehensions ********************/
+
+var customers = ["Seattle", "Washington", "San Francisco"];
+// Array comprehensions
+//var results = [
+//  for(c of customers)
+//    if (c.city == "Seattle")
+//      { name: c.name, age: c.age }
+//]
+//
+//// Generator comprehensions
+//var result = {
+//  for(c of customers)
+//    if (c.city == "Seattle")
+//      { name: c.name, age: c.age }
+//}
+
+/***************************** Modules ********************/
+
+/***************************** Map + Set + WeakMap + WeakSet ********************/
+var set = new Set();
+set.add("hello").add("goodbye").add("hello");
+printf(set.size);
+printf(set.has("hello"));
+
+// Maps
+var map = new Map();
+map.set("hello", 42);
+map.set(set, 34);
+printf(map.get(set));
+
+// Weak Maps
+var wm = new WeakMap();
+wm.set(set, { extra: 42 });
+printf(wm.size); // undefined
+
+// Weak Sets
+var ws = new WeakSet();
+ws.add({ data: 42 });
+printf(ws.has({ data: 42 }));
+// Because the added object has no other references, it will not be held in the set
+
+/***************************** Proxies ********************/
+
+// Proxies enable creation of objects with the full range of behaviors available to
+// host objects. Can be used for interception, object virtualization, logging/profiling, etc
+
+// Proxing a normal object
+var target = {};
+var handler = {
+  get: function get(receiver, name) {
+    return "Hello, " + name + "!";
+  }
+};
+
+//var p = new Proxy(target, handler);
+//p.world === "Hello, world!";
+//printf(p.world);
+
+/***************************** Subclassable Built-ins ********************/
+// Array, Date, Element can be subclassed
+
+var MyArray = (function (_Array) {
+  function MyArray() {
+    for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+      args[_key2] = arguments[_key2];
+    }
+
+    _classCallCheck(this, MyArray);
+
+    _get(Object.getPrototypeOf(MyArray.prototype), "constructor", this).apply(this, args);
+  }
+
+  _inherits(MyArray, _Array);
+
+  return MyArray;
+})(Array);
+
+var arr = new MyArray();
+arr[0] = 10;
+arr[1] = 12;
+printf("MyArray length:" + arr.length);
 

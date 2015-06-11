@@ -1,0 +1,23 @@
+strong { color: red; }
+
+/* Action: Using class and ID selectors */
+.carrot { color: orange; }
+.spinach { color: green; }
+
+#first { font-style: italic; }
+#second, #first { color: blue; }
+
+
+/* id */
+#principal {
+  font-weight: bolder;
+}
+
+/* Pseudo-classes selectors */
+selector:pseudo-class {
+  property: value;
+}
+
+
+#data-table-1 td:first-child {font-weight: bolder;}
+  #data-table-1 td:first-child + td {font-family: monospace;}

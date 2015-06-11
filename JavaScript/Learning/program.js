@@ -618,6 +618,33 @@ printf("\n==================== apply()====================\n");
  ***************************************************/
 
 
+printf("\n==================== Prototype ====================\n");
+
+function Person(name, gender) {
+  // Add object properties like this
+  this.name = name;
+  this.gender = gender;
+}
+
+// Add methods like this, All Person objects will be able to invoke this
+Person.prototype.speak = function() {
+  printf("Howdy, my name is" + this.name);
+};
+
+// Instantiate new objects with 'new'
+var person = new Person("bob", "M");
+
+// Invoke methods like this
+person.speak();
+
+
+printf("\n==================== keyword 'new' ====================\n");
+
+
+
+
+
+
 printf("\n/******************** ECMAScript 6 ********************/\n");
 
 
