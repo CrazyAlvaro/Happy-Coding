@@ -1,11 +1,16 @@
-strong { color: red; }
+strong {
+  font: 200% serif;
+  color: red;
+}
 
 /* Action: Using class and ID selectors */
-.carrot { color: orange; }
+/* .carrot { color: orange; } */
 .spinach { color: green; }
 
+body {font: 16px "Comic Sans MS", cursive;}
+
 #first { font-style: italic; }
-#second, #first { color: blue; }
+p { color: blue; }
 
 
 /* id */
