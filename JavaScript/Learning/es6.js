@@ -275,9 +275,9 @@ var promise = timeout(1000).then(() => {
 //  fulfills the promise, the second argument rejects it. We can call these functions
 //  once our operation is completed.
 
-constructor takes one argument, a callback with two parameters, resolve and reject
-
-"then" taks two arguments, a callback for a success case, and another for the failure case.
-(both are optional)
+//constructor takes one argument, a callback with two parameters, resolve and reject
+//
+//"then" taks two arguments, a callback for a success case, and another for the failure case.
+//(both are optional)
 
 
