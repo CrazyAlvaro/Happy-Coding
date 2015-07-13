@@ -26,7 +26,7 @@ printf("\n/******************** CHAPTER 5 Inheritance ********************/\n");
 
 function simpleCall(){
   //"use strict";
-  console.log(this);  // this undefined
+  //console.log(this);  // this undefined
 }
 
 simpleCall();
@@ -681,3 +681,8 @@ var bob = {
 
 printf("\n==================== Classes ====================\n");
 
+//setTimeout("alert('hi!');", 500);
+
+var interval_id = setInterval("alert('hi!');", 500);
+
+setTimeout("clearInterval(interval_id)", 5000);
