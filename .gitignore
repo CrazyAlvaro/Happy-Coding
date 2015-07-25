@@ -1,3 +1,4 @@
-/JavaScript/*/node_modules/
-/NodeJS/node_modules/
-*/.DS_Store
+# OS X file
+.DS_Store
+node_modules/
+babel.js

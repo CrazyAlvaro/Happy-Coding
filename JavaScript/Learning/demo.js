@@ -10,23 +10,24 @@
  * object created by the constructor function on which you called method.
  *
  */
+"use strict";
 
 Function.prototype.method = function (name, func) {
-  this.prototype[name] = func;    // 'this' is a reference to the object on which the method was called.
+  this.prototype[name] = func; // 'this' is a reference to the object on which the method was called.
   return this;
 };
 
 // printf wrapper of document.writeln
-var printf = function(object) {
+var printf = function printf(object) {
   document.writeln(object);
-}
+};
 //document.writeln('Hello, world');
 
 printf("\n/******************** CHAPTER 5 Inheritance ********************/\n");
 
-function simpleCall(){
+function simpleCall() {
   //"use strict";
-  //console.log(this);  // this undefined
+  console.log(this); // this undefined
 }
 
 simpleCall();
@@ -57,10 +58,10 @@ fade(document.body);
 */
 
 // BAD EXAMPLE
-var add_the_handlers = function (nodes) {
+var add_the_handlers = function add_the_handlers(nodes) {
   var i;
-  for (i = 0; i < nodes.length; i += 1){
-    nodes[i].onclick = function(e){
+  for (i = 0; i < nodes.length; i += 1) {
+    nodes[i].onclick = function (e) {
       alert(i);
     };
   }
@@ -74,8 +75,8 @@ var add_the_handlers = function (nodes) {
 
 // BETTER EXAMPLE
 
-var add_the_handlers = function (nodes) {
-  var helper = function (i) {
+var add_the_handlers = function add_the_handlers(nodes) {
+  var helper = function helper(i) {
     return function (e) {
       // because the i is bound to the context, it will always be the original value
       alert(i);
@@ -98,43 +99,41 @@ var add_the_handlers = function (nodes) {
 
 printf("\n==================== Module ====================\n");
 
-String.method("deentityify", function(){
+String.method("deentityify", (function () {
   // The entity table. It maps entity names to characters
 
   var entity = {
-    quot: '"',
-    lt:   '<',
-    gt:   '>'
+    quot: "\"",
+    lt: "<",
+    gt: ">"
   };
 
   // REturn the deentityify method.
 
   return function () {
 
-    return this.replace(/&([^&;]+);/g,
-      function (a, b) {   // a is matching substring, b is matching part inside ( )
-        var r = entity[b];
-        return typeof r === 'string' ? r : a;
-      }
-    );
+    return this.replace(/&([^&;]+);/g, function (a, b) {
+      // a is matching substring, b is matching part inside ( )
+      var r = entity[b];
+      return typeof r === "string" ? r : a;
+    });
   };
-}()); // Invoke function immediately
+})()); // Invoke function immediately
 
-document.writeln(
-  "&lt;&quot;&gt;".deentityify());  // <">
+document.writeln("&lt;&quot;&gt;".deentityify()); // <">
 
 // Serial number maker
-var serial_maker = function () {
-  var prefix = '';
+var serial_maker = function serial_maker() {
+  var prefix = "";
   var seq = 0;
   return {
-    set_prefix: function (p) {
+    set_prefix: function set_prefix(p) {
       prefix = String(p);
     },
-    set_seq: function (s) {
+    set_seq: function set_seq(s) {
       seq = s;
     },
-    gensym: function() {
+    gensym: function gensym() {
       var result = prefix + seq;
       seq += 1;
       return result;
@@ -143,9 +142,9 @@ var serial_maker = function () {
 };
 
 var seqer = serial_maker();
-seqer.set_prefix('Q');
+seqer.set_prefix("Q");
 seqer.set_seq(1000);
-var unique = seqer.gensym();  // unique is "Q1000"
+var unique = seqer.gensym(); // unique is "Q1000"
 document.writeln(unique);
 
 /*****************************************
@@ -158,14 +157,15 @@ printf("\n==================== Curry ====================\n");
 // var add1 = add.curry(1);
 // document.writeln(add1(5));  // 6
 
-Function.method('curry', function () {
-  var args = arguments, that = this;
+Function.method("curry", function () {
+  var args = arguments,
+      that = this;
   return function () {
     return that.apply(null, args.concat(arguments));
   };
 }); // something isn't right arguments is not an array
 
-Function.method('curry', function () {
+Function.method("curry", function () {
   var slice = Array.prototype.slice,
       args = slice.apply(arguments),
       that = this;
@@ -185,8 +185,8 @@ printf("\n==================== Memoization ====================\n");
 document.writeln("Computing Fibonacci Numbers");
 
 // recursive way
-var fibonacci = function (n) {
-  return n < 2 ? n : fibonacci(n-1) + fibonacci(n-2);
+var fibonacci = function fibonacci(n) {
+  return n < 2 ? n : fibonacci(n - 1) + fibonacci(n - 2);
 };
 
 // my code
@@ -201,24 +201,23 @@ var fibonacci = function (n) {
 
 //memoization way, also hide memo in a closure
 var fibonacci = (function () {
-  var memo = [0,1];
-  var fib = function (n) {
+  var memo = [0, 1];
+  var fib = function fib(n) {
     var result = memo[n];
-    if (typeof result !== 'number') {
+    if (typeof result !== "number") {
       result = fib(n - 1) + fib(n - 2);
       memo[n] = result;
     }
     return result;
   };
   return fib;
-}());
-
+})();
 
 // Generalize this Memoization
-var memoizer = function (memo, formula) {
-  var recur = function (n) {
+var memoizer = function memoizer(memo, formula) {
+  var recur = function recur(n) {
     var result = memo[n];
-    if (typeof result !== 'number') {
+    if (typeof result !== "number") {
       result = formula(recur, n);
       memo[n] = result;
     }
@@ -228,19 +227,17 @@ var memoizer = function (memo, formula) {
 };
 
 // Fabonacci number
-var fibonacci = memoizer([0,1], function (recur, n) {
+var fibonacci = memoizer([0, 1], function (recur, n) {
   return recur(n - 1) + recur(n - 2);
 });
 
-
 for (var i = 0; i <= 4; i += 1) {
-  document.writeln('//' + i + ': ' + fibonacci(i));
+  document.writeln("//" + i + ": " + fibonacci(i));
 }
 
-var factorial = memoizer([1,1], function (recur, n) {
-    return n * recur(n - 1);
+var factorial = memoizer([1, 1], function (recur, n) {
+  return n * recur(n - 1);
 });
-
 
 /*****************************************
  *
@@ -255,7 +252,7 @@ printf("\n==================== Array.reduce()====================\n");
 // for loop to compute the sum of an array
 var total = 0;
 var numbers = [1, 5, 7, 3, 8, 9];
-for ( var i = 0; i < numbers.length; i++ ){
+for (var i = 0; i < numbers.length; i++) {
   total += numbers[i];
 }
 
@@ -263,24 +260,27 @@ document.writeln("\nTotal value using for loop is:" + total);
 
 // using reduce method:
 // callback( previousValue(last invocation of the callback), currentValue, index, array )
-var sum = numbers.reduce( function(total, num){ return total + num }, 0); // 0 is initial value, optional
+var sum = numbers.reduce(function (total, num) {
+  return total + num;
+}, 0); // 0 is initial value, optional
 document.writeln("\nTotal value using reduce method is:" + sum);
-
 
 // for loop concat an array of string
 var message = "";
 var words = ["reducing", "is", "simple"];
-for ( var i = 0; i < words.length; i++ ){
+for (var i = 0; i < words.length; i++) {
   message += words[i];
 }
 document.writeln("\nMessage using for loop is:" + message);
 
-var line = words.reduce( function(build_line, word) { return build_line + word; } );
+var line = words.reduce(function (build_line, word) {
+  return build_line + word;
+});
 document.writeln("\nMessage using reduce is:" + line);
 
 // Faltten an array of arrays
-var flattened = [[0, 1], [2, 3], [4, 5]].reduce( function(previousValue, currentValue) {
-  return previousValue.concat(currentValue);    // using array concat method
+var flattened = [[0, 1], [2, 3], [4, 5]].reduce(function (previousValue, currentValue) {
+  return previousValue.concat(currentValue); // using array concat method
 });
 document.writeln("\nFlatten array is:" + flattened);
 
@@ -298,24 +298,24 @@ var roots = numbers.map(Math.sqrt);
 document.writeln("\nnumbers are:" + numbers + " roots of numbers are:" + roots);
 
 // Example: reformat objects in an array
-var kvArray = [{key:1, value:10}, {key:2, value:20}, {key:3, value: 30}];
-var reformattedArray = kvArray.map(function(obj) {
+var kvArray = [{ key: 1, value: 10 }, { key: 2, value: 20 }, { key: 3, value: 30 }];
+var reformattedArray = kvArray.map(function (obj) {
   var rObj = {};
   rObj[obj.key] = obj.value;
   return rObj;
 });
 
-document.writeln("\n print object \n kvArray are:" +
-    JSON.stringify(kvArray) + "\n reformattedArray are:" + JSON.stringify(reformattedArray));
+document.writeln("\n print object \n kvArray are:" + JSON.stringify(kvArray) + "\n reformattedArray are:" + JSON.stringify(reformattedArray));
 
 // Example: reverse a string using map
-var str = '123456';
-var values = [].map.call(str, function(x) {     /* TODO: understand why call bind str as this to map function */
+var str = "123456";
+var values = [].map.call(str, function (x) {
+  /* TODO: understand why call bind str as this to map function */
   return x;
-}).reverse().join('');
+}).reverse().join("");
 document.writeln("\n reverse str of: " + str + " is: " + values);
 
-var numberArray = ['1', '2', '3'];
+var numberArray = ["1", "2", "3"];
 var result = numberArray.map(parseInt);
 // actual result is [1, NaN, NaN]
 // Array.prototype.map passes 3 arguments:
@@ -332,41 +332,42 @@ document.writeln("\n result of parseInt of " + numberArray + " is: " + result);
 
 // implementation of the map function
 
-if(Array.prototype.map) {
+if (Array.prototype.map) {
 
-  Array.prototype.map = function(callback, thisArg) {
+  Array.prototype.map = function (callback, thisArg) {
 
-//    //  check thisArg is typeof Array
-//    if(thisArg.isArray) {
-//      throw("type error");
-//    }
-//
-//    //  for each element, call callback, concat with new array, return
-//    var result = [];
-//    for( var i = 0; i < thisArg.length; i++ ) {
-//      result.concat( callback(thisArg[i], i, thisArg) )
-//    }
-//    return result
+    //    //  check thisArg is typeof Array
+    //    if(thisArg.isArray) {
+    //      throw("type error");
+    //    }
+    //
+    //    //  for each element, call callback, concat with new array, return
+    //    var result = [];
+    //    for( var i = 0; i < thisArg.length; i++ ) {
+    //      result.concat( callback(thisArg[i], i, thisArg) )
+    //    }
+    //    return result
 
     var thisValue, newArray, index;
 
-    if(this == null) {    //different between '==' and '===': loos equality, not check type, strict equality
-      throw new TypeError(' this is null or not defined');
+    if (this == null) {
+      //different between '==' and '===': loos equality, not check type, strict equality
+      throw new TypeError(" this is null or not defined");
     }
 
     var arrayObject = Object(this);
 
-    var len = arrayObject.length >>> 0;   // zero-fill right shift, shift in zeros from the left
+    var len = arrayObject.length >>> 0; // zero-fill right shift, shift in zeros from the left
 
-    if (typeof callback !== 'function') {
-      throw new TypeError(callback + ' is not a function');
+    if (typeof callback !== "function") {
+      throw new TypeError(callback + " is not a function");
     }
 
     if (arguments.length > 1) {
       thisValue = thisArg;
     }
 
-    newArray = new Array(len);    // create a new array with size len
+    newArray = new Array(len); // create a new array with size len
 
     index = 0;
 
@@ -384,7 +385,7 @@ if(Array.prototype.map) {
     }
 
     return newArray;
-  }
+  };
 }
 
 // or just do this, test
@@ -404,21 +405,12 @@ function isBigEnough(value) {
 var filtered = [12, 5, 8, 130, 44].filter(isBigEnough);
 
 // Filtering invalid entries from JSON
-var arr = [
-  { id: 15 },
-  { id: -1},
-  { id: 0},
-  { id: 12.2},
-  { },
-  { id: null },
-  { id: NaN },
-  { id: 'undefined' }
-];
+var arr = [{ id: 15 }, { id: -1 }, { id: 0 }, { id: 12.2 }, {}, { id: null }, { id: NaN }, { id: "undefined" }];
 
 var invalidEntries = 0;
 
 function filterByID(obj) {
-  if ('id' in obj && typeof(obj.id) === 'number' && !isNaN(obj.id)) {
+  if ("id" in obj && typeof obj.id === "number" && !isNaN(obj.id)) {
     return true;
   } else {
     invalidEntries++;
@@ -426,7 +418,7 @@ function filterByID(obj) {
   }
 }
 
-var arrByID = arr.filter(filterByID)    // pass a filter callback function to filter the array elments
+var arrByID = arr.filter(filterByID); // pass a filter callback function to filter the array elments
 document.writeln("\n" + JSON.stringify(arrByID));
 
 /***************************************************
@@ -440,11 +432,10 @@ printf("\n==================== Array.some()====================\n");
 function isBiggerThan10(element, index, array) {
   return element > 10;
 }
-var tArray1 =[2, 5, 8, 1, 4];
-var tArray2 =[12, 5, 8, 1, 4];
+var tArray1 = [2, 5, 8, 1, 4];
+var tArray2 = [12, 5, 8, 1, 4];
 document.writeln("[" + tArray1.toString() + "].some(isBiggerThan10) " + tArray1.some(isBiggerThan10));
 document.writeln("[" + tArray2.toString() + "].some(isBiggerThan10) " + tArray2.some(isBiggerThan10));
-
 
 /***************************************************
  * method: every
@@ -456,7 +447,7 @@ function isBigEnough(element, index, array) {
   return element >= 10;
 }
 
-var array1 = [12, 54, 18, 130,44];
+var array1 = [12, 54, 18, 130, 44];
 document.writeln(array1.every(isBigEnough));
 
 // or using arrow functions
@@ -477,12 +468,12 @@ printf("\n==================== JSON.stringify()====================\n");
 printf("{}" + JSON.stringify({}));
 
 // replacer example
-var foo = {foundation: "Mozilla", model: "box", week: 45, transport: "car", month: 7};
+var foo = { foundation: "Mozilla", model: "box", week: 45, transport: "car", month: 7 };
 printf(JSON.stringify(foo));
 
 function replacerString(key, value) {
   if (typeof value === "string") {
-    return undefined;   // discard value type if string
+    return undefined; // discard value type if string
   }
   return value;
 }
@@ -490,28 +481,28 @@ function replacerString(key, value) {
 printf(JSON.stringify(foo, replacerString));
 
 // example with an array
-printf(JSON.stringify(foo, ['week', 'month']));   // only keep 'week', 'month' properties
+printf(JSON.stringify(foo, ["week", "month"])); // only keep 'week', 'month' properties
 
 // using ' or ", another as literal
 printf("Say 'Hello'");
-printf('Say "Hello"');
+printf("Say \"Hello\"");
 
-printf(JSON.stringify({a: 2}));
-printf(JSON.stringify({a: 2}, null, ' '));
+printf(JSON.stringify({ a: 2 }));
+printf(JSON.stringify({ a: 2 }, null, " "));
 
-printf(JSON.stringify({uno: 1, dos: 2}));
-printf(JSON.stringify({uno: 1, dos: 2}, null, ' '));
-
+printf(JSON.stringify({ uno: 1, dos: 2 }));
+printf(JSON.stringify({ uno: 1, dos: 2 }, null, " "));
 
 // toJSON() behavior
 var obj = {
-  foo: 'foo',
-  toJSON: function() {    // only the invocation of this function will be serialized
-    return 'bar';
+  foo: "foo",
+  toJSON: function toJSON() {
+    // only the invocation of this function will be serialized
+    return "bar";
   }
 };
 printf(JSON.stringify(obj));
-printf(JSON.stringify({x: obj}));
+printf(JSON.stringify({ x: obj }));
 
 /***************************************************
  * JSON
@@ -520,8 +511,8 @@ printf(JSON.stringify({x: obj}));
  * the value produced by parsing
  ***************************************************/
 printf("\n==================== JSON.parse()====================\n");
-printf(JSON.parse('{}'));
-printf(JSON.parse('[1, 5, "false"]'));
+printf(JSON.parse("{}"));
+printf(JSON.parse("[1, 5, \"false\"]"));
 
 /***************************************************
  * method: bind
@@ -560,10 +551,10 @@ var list1 = listFunc(4, 5, 6); // [4, 5, 6]
 
 // Create a function with a preset leading argument
 var leadingThirtysevenList = listFunc.bind(undefined, 23, 37);
-var list2 = leadingThirtysevenList();       // [23, 37]
-var list3 = leadingThirtysevenList(4, 5, 6);  // [23, 37, 4, 5, 6]
+var list2 = leadingThirtysevenList(); // [23, 37]
+var list3 = leadingThirtysevenList(4, 5, 6); // [23, 37, 4, 5, 6]
 
-printf(list1 + '\n' + list2 + '\n' + list3);
+printf(list1 + "\n" + list2 + "\n" + list3);
 
 // With setTimeout
 function LateBloomer() {
@@ -572,19 +563,17 @@ function LateBloomer() {
 
 // Declare bloom after a delay of 1 second
 // by default window.setTimeout(), the this keyword will be set to the window(or global) object.
-LateBloomer.prototype.bloom = function() {    // what's this prototype
+LateBloomer.prototype.bloom = function () {
+  // what's this prototype
   window.setTimeout(this.declare.bind(this), 1000);
   //window.setTimeout(this.declare(), 1000);
 };
 
-var getX = module.getX;
-//printf(getX()); // 9, because a new function with 'this' bound to module
-LateBloomer.prototype.declare = function() {
-  console.log('I am a beautiful flower with ' +
-      this.petalCount + ' petals!');
+LateBloomer.prototype.declare = function () {
+  console.log("I am a beautiful flower with " + this.petalCount + " petals!");
 };
 
-LateBloomer.prototype.bloom();    //TODO: resolve this
+LateBloomer.prototype.bloom(); //TODO: resolve this
 
 /***************************************************
  * method: call
@@ -600,8 +589,7 @@ function Product(name, price) {
   this.price = price;
 
   if (price < 0) {
-    throw RangeError('Cannot create product ' +
-                      this.name + ' with a negative price');
+    throw RangeError("Cannot create product " + this.name + " with a negative price");
   }
 
   return this;
@@ -609,34 +597,29 @@ function Product(name, price) {
 
 function Food(name, price) {
   Product.call(this, name, price);
-  this.category = 'food';
+  this.category = "food";
 }
 
-Food.prototype = Object.create(Product.prototype);    //TODO: what fun.prototype means ?
+Food.prototype = Object.create(Product.prototype); //TODO: what fun.prototype means ?
 
 function Toy(name, price) {
   Product.call(this, name, price);
-  this.category = 'toy';
+  this.category = "toy";
 }
 
 Toy.prototype = Object.create(Product.prototype);
 
-var cheese = new Food('feta', 5);
-var fun = new Toy('robot', 40);
-
+var cheese = new Food("feta", 5);
+var fun = new Toy("robot", 40);
 
 // Example: Using call to invoke an anonymous function TODO: use reduce function other than for
-var animals = [
-  { species: 'Lion', name: 'King' },
-  { species: 'Whale', name: 'Fail'}
-];
+var animals = [{ species: "Lion", name: "King" }, { species: "Whale", name: "Fail" }];
 
 for (var i = 0; i < animals.length; i++) {
-  (function(i) {
-    this.print = function() {
-      printf('#' + i + ' ' + this.species
-                  + ': ' + this.name);
-    }
+  (function (i) {
+    this.print = function () {
+      printf("#" + i + " " + this.species + ": " + this.name);
+    };
     this.print();
   }).call(animals[i], i);
 }
@@ -649,82 +632,6 @@ for (var i = 0; i < animals.length; i++) {
  ***************************************************/
 printf("\n==================== apply()====================\n");
 
-
-/***************************************************
- * method: later
- *
- *
- ***************************************************/
-
-
-printf("\n==================== Prototype ====================\n");
-
-function Person(name, gender) {
-  // Add object properties like this
-  this.name = name;
-  this.gender = gender;
-}
-
-// Add methods like this, All Person objects will be able to invoke this
-Person.prototype.speak = function() {
-  printf("Howdy, my name is" + this.name);
-};
-
-// Instantiate new objects with 'new'
-var person = new Person("bob", "M");
-
-// Invoke methods like this
-person.speak();
-
-
-printf("\n==================== keyword 'new' ====================\n");
-
-
-
-
-
-
-printf("\n/******************** ECMAScript 6 ********************/\n");
-
-
-/***************************************************
- * Arrows: function
- * Different than function, share the same 'this'
- *
- ***************************************************/
-printf("\n==================== Arrows ====================\n");
-// Expression bodies
-var evens = [2, 4, 6];
-var odds = evens.map(v => v + 1);
-var nums = evens.map((v, i) => v + i);
-
-printf(odds);
-printf(nums);
-
-// Statement bodies
-nums.forEach(v => {
-  if (v % 5 === 0)
-    fives.push(v);
-});
-
-// lexical this
-var bob = {
-  _name: "Bob",
-  _friends: ["Yechen"],
-  printfFriends() {
-    this._friends.forEach(f =>
-        printf(this._name + " knows " + f));   // "this" is the same as the function
-  }
-}
-
-
-printf("\n==================== Classes ====================\n");
-
-//setTimeout("alert('hi!');", 500);
-
-var interval_id = setInterval("alert('hi!');", 500);
-
-setTimeout("clearInterval(interval_id)", 5000);
 //TODO: understand this
 // Example: Using apply to chain constructors
 Function.prototype.construct = function (aArgs) {
@@ -735,22 +642,23 @@ Function.prototype.construct = function (aArgs) {
 
 function MyConstructor() {
   for (var nProp = 0; nProp < arguments.length; nProp++) {
-    this['property' + nProp] = arguments[nProp];
+    this["property" + nProp] = arguments[nProp];
   }
 }
 
-var myArray = [4, 'Hello world!', false];
+var myArray = [4, "Hello world!", false];
 var myInstance = MyConstructor.construct(myArray);
 
 //alert(myInstance.property1);
 //alert(myInstance instanceof MyConstructor);
 //alert(myInstance.constructor);
 
-
 /* Associative not working */
-var a = 0.1, b = 0.2, c = 0.3;
+var a = 0.1,
+    b = 0.2,
+    c = 0.3;
 
-if ( (a + b) + c === a + (b + c) ) {
+if (a + b + c === a + (b + c)) {
   printf("associative true\n");
 } else {
   printf("associative false\n");
@@ -761,13 +669,13 @@ var numbers = [2, 3, 4, 12, 22, 34, 42];
 printf(numbers.sort());
 
 /* delete element in array */
-myArray = ['a', 'b', 'c', 'd' ];
+myArray = ["a", "b", "c", "d"];
 
 delete myArray[1];
-printf(myArray);  // ['a', undefined, 'c', 'd']
+printf(myArray); // ['a', undefined, 'c', 'd']
 
 myArray.splice(1, 1);
-printf(myArray);  // ['a', 'c', 'd']
+printf(myArray); // ['a', 'c', 'd']
 
 // array typeof 'object'
 // null  typeof 'object'
@@ -780,7 +688,6 @@ printf(myArray);  // ['a', 'c', 'd']
 
 // TODO: understand prototype, function.prototype, object.prototype
 //
-
 
 printf("\n==================== Promise ====================\n");
 // Promise
@@ -806,49 +713,15 @@ printf("\n==================== Promise ====================\n");
 //    runAnimation(2);
 //  });
 
-new Promise(function(resolve, reject) {
-  reject(' :( ');
-})
-  .then(null, function(error) {
-    console.log('First error: ' + error);
-    // Handle the rejected promise
-    return 'some description of :(';
-  })
-  .then(
-    function(data) { console.log('resolved: '+data); },
-    function(error) { console.log('rejected: '+error); }
-  );
-
-
-
-function finalRequestPromise(options) {
-  return new Promise(function(resolve, reject) {
-    finalRequest(options, function(error, data) {
-      if (error) {
-        reject(error);    // return a promise which fails with the passed in value
-      } else {
-        resolve(data);    // return a promise which resolves to it's argument
-      }
-    });
-  });
-}
-
-
-// example
-Promise
-  .all([
-    initialRequestA(),
-    initialRequestB()
-  ])
-  .then(function(results) {
-    // this return is not a promise
-    //return getOptionsFromInitialData(results[0], results[1]);
-    options = getOptionsFromInitialData(results[0], results[1]);
-    return finalRequestPromise(options);
-  })
-  .then(
-      function(file) { alert(file); }
-      function(error) { alert(error); }
-    })
-  });
+new Promise(function (resolve, reject) {
+  reject(" :( ");
+}).then(null, function (error) {
+  console.log("First error: " + error);
+  // Handle the rejected promise
+  return "some description of :(";
+}).then(function (data) {
+  console.log("resolved: " + data);
+}, function (error) {
+  console.log("rejected: " + error);
+});
 
