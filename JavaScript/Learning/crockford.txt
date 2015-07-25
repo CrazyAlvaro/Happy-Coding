@@ -1,0 +1,36 @@
+ES5 Strict  future
+  small language
+
+Objects: a dynamic collection of properties
+    key string
+
+    get,
+      object.name
+      object[expression]
+
+    set,
+      object.name = value
+      object[expression] = value
+
+    delete
+      delete object.name
+      delete object[expression]
+
+    Two kinds of property: data, value
+
+    property: a named collection of attributes
+      value
+      writeable
+      enumerable
+      configurable
+      get
+      set
+
+  new in ES5
+    Object.defineProperty(object, key, descriptor)
+    Object.defineProperties(object, object_of_descriptors)
+
+    Object.getOwnPropertyDescriptor(object, key)
+    Object.getOwnProperties(object)
+
+    Object.keys(object)
