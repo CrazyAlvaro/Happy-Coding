@@ -44,3 +44,4 @@
   release-assets-cleanup = "!f() { RELEASE_W_ASSETS=$1-with-assets; git branch -D $RELEASE_W_ASSETS && git push origin :$RELEASE_W_ASSETS; }; f"
   rba = !git rebase --abort
   cleanup = !git branch --merged | grep -v \"\\\\*\" | xargs git branch -D
+  remote-cleanup = !git branch -r --merged | grep -v master | grep -v development | sed 's/origin\\///' | xargs -n 1 git push --delete origin
