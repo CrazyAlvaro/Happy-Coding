@@ -1,0 +1,46 @@
+[user]
+  name = Yechen Huang
+  email = yechenhuang@gmail.com
+[core]
+  editor = vim
+[alias]
+  full-branch-name = "!f() { git symbolic-ref HEAD 2>/dev/null || git rev-parse --short HEAD 2>/dev/null; }; f"
+  branch-name = "!f() { git full-branch-name | sed \"s#refs/heads/##\"; }; f"
+  st = !git status
+  co = "!f() { git checkout $1; }; f"
+  dev = !git checkout development
+  dev-pull = !git dev && git pull origin development
+  dev-push = !git dev && git push origin development
+  dev-rebase = !git rebase development
+  prod = !git checkout master
+  prod-pull = !git prod && git pull origin master
+  prod-push = !git prod && git push origin master
+  prod-rebase = !git rebase master
+  refresh = "!f() { git co $1 && CURRENT=$(git branch-name) && git dev-pull && git checkout $CURRENT && git dev-rebase; }; f"
+  done = "!f() { git co $1 && CURRENT=$(git branch-name) && git refresh && git dev && git merge --no-ff $CURRENT && git dev-push; }; f"
+  undo = "!f() { git reset --hard HEAD && git clean -f; }; f"
+  start = "!f() { git dev-pull && git checkout -b $1; }; f"
+  rbc = !git rebase --continue
+  task = "!f() { git branch-name | sed -E \"s/(.+)-([0-9]+)$/\\\\2/g\"; }; f"
+  taskc = "!f() { git task | tr -d \"\\n\" | pbcopy; }; f"
+  branch-start = "!f() { BASE=$1 && git fetch && git co $BASE && git branch-pull $BASE && git checkout -b $2; }; f"
+  branch-refresh = "!f() { BASE=$1 && git co $2 && CURRENT=$(git branch-name) && git branch-pull $BASE && git checkout $CURRENT && git branch-rebase $BASE; }; f"
+  branch-rebase = "!f() { git rebase $1; }; f"
+  branch-pull = "!f() { git fetch && git co $1 && CURRENT=$(git branch-name) && git pull origin $CURRENT; }; f"
+  branch-done = "!f() { BASE=$1 && git co $2 && CURRENT=$(git branch-name) && git branch-refresh $BASE $CURRENT && git co $BASE && git merge --no-ff $CURRENT && git branch-push $BASE; }; f"
+  branch-push = "!f() { git co $1 && CURRENT=$(git branch-name) && git push origin $CURRENT; }; f"
+  branch-tag = "!f() { TAG=$2 && git co $1 && CURRENT=$(git branch-name) && git tag -a $TAG && git push --tags origin $CURRENT; }; f"
+  hot-start = "!f() { git prod-pull && git checkout -b $1; }; f"
+  hot-push = !git hot-refresh && git branch-push
+  hot-done = "!f() { git co $1 && CURRENT=$(git branch-name) && git hot-refresh && git prod && git merge --no-ff $CURRENT && git prod-push; }; f"
+  hot-refresh = "!f() { git co $1 && CURRENT=$(git branch-name) && git prod-pull && git checkout $CURRENT && git prod-rebase; }; f"
+  release-to-prod = "!f() { RELEASE=$1 && git branch-start $RELEASE release-to-prod-$RELEASE && git hot-done && git branch -D release-to-prod-$RELEASE; }; f"
+  release-to-dev = "!f() { RELEASE=$1 && git branch-start $RELEASE release-to-dev-$RELEASE && git done && git branch -D release-to-dev-$RELEASE; }; f"
+  prod-to-dev = "!f() { git branch -D prod-to-dev; git hot-start prod-to-dev && git done && git branch -D prod-to-dev; }; f"
+  prod-to-release = "!f() { RELEASE=$1 && git branch -D prod-to-release; git hot-start prod-to-release && git branch-done $RELEASE && git branch -D prod-to-release; }; f"
+  release-start = "!f() { RELEASE=$1 && git start $RELEASE && git done && git branch-tag $RELEASE $RELEASE-qa; }; f"
+  release-freeze = "!f() { RELEASE=$1 && git branch-tag $RELEASE $RELEASE-freeze; }; f"
+  release-finish = "!f() { RELEASE=$1 && git release-to-prod $RELEASE && git branch-tag $RELEASE $RELEASE-final; }; f"
+  release-assets-cleanup = "!f() { RELEASE_W_ASSETS=$1-with-assets; git branch -D $RELEASE_W_ASSETS && git push origin :$RELEASE_W_ASSETS; }; f"
+  rba = !git rebase --abort
+  cleanup = !git branch --merged | grep -v \"\\\\*\" | xargs git branch -D
