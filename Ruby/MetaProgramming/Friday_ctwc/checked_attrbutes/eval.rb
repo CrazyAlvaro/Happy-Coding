@@ -89,17 +89,6 @@ end
 #@bob = Person.new
 #p Person.instance_methods.grep(/age/)
 
-
-
-
-
-
-
-
-
-
-
-
 ##################################################
 ## My solution
 ##
