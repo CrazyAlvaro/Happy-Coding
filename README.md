@@ -1,4 +1,5 @@
 Everyday-Coding
 ===============
 
-My playground
+=======
+My Daily Playground
