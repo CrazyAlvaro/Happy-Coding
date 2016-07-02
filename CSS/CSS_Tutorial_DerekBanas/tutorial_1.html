@@ -1,0 +1,70 @@
+<html>
+  <head>
+    <meta http-equiv="content-type"  content="text/html">
+    <title>Cascading Style Sheets</title>
+    <style>
+      body {
+        font-family: : verdana, arial, sans-serif;
+      }
+
+      p {
+        color: purple;
+      }
+
+      h1, h2, em, b {
+        font-family: : times new roman, geogia, serif;
+      }
+
+      a {
+        font-family: : verdana, arial, sans-serif;
+      }
+
+      h1 {
+        font-family: times new roman, georgia, serif;
+        font-size: 14px;
+      }
+
+      h1.purple {
+        color: purple;
+      }
+
+      h1.green {
+        color: green;
+      }
+
+      .purpleserif{
+        font-family: times new roman, georgia, serif;
+        colro: purple;
+      }
+    </style>
+
+  </head>
+  <body>
+    Body Text
+    <p>
+      This is some paragraph text <br />
+      <i>This is italic text</i><br />
+      This is <h1>H1</h1><br />
+      This is <h2>H2</h2><br />
+      This is a <a href="">Awesome</a><br />
+      <b>This is bold</b><br />
+    </p>
+
+    More body text
+
+    Block Statements: blockquoto, dl, form, h, tags, hr, ol, p, table, ul
+    <br />
+    body is not a block elment, it will affect all elements inside it,
+    While p is a block element , it will not affect other block element
+    <br />
+
+    a is a inline statement, so it goes back to use p style
+
+    <h1>Regular H1</h1>
+    <h1 class="purple">Purple H1</h1>
+    <h1 class="green">Green H1</h1>
+
+    <h1>Regular</h1>
+    <h1 class="purpleserif">Purple H1</h1>
+  </body>
+</html>
