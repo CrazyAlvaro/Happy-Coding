@@ -44,7 +44,7 @@ class Order
   end
 
   def init_system_param
-    @params["method"] = "360buy.order.search"
+    @params["method"] = "360buy.ware.get"
     @params["timestamp"] = Time.now.strftime("%Y-%m-%d %H:%M:%S")
     @params["access_token"] = ACCESSOR_TOKEN
     @params["app_key"] = APP_KEY
@@ -54,15 +54,14 @@ class Order
   def init_app_param
     app_param = Hash.new
 
-    app_param["page"] = 1
-    app_param["page_size"] = 20
-    app_param["start_date"] = "2016-05-02 12:00:00"
-    app_param["end_date"] = "2016-06-01 12:00:00"
-    app_param["order_state"] = "FINISHED_L"
-    app_param["optional_fields"] = "delivery_type,logistics_id,order_end_time,order_state_remark,order_state,order_payment,"\
-      "order_remark,order_id,customs_model,consignee_info,pay_type,item_info_list,order_source,balance_used,order_total_price,"\
-      "payment_confirm_time,customs,coupon_detail_list,invoice_info,waybill,parent_order_id,freight_price,store_order,modified,"\
-      "order_start_time,pin,return_order,seller_discount,order_seller_price,vender_id,vender_remark,order_type,vat_invoice_info"
+    app_param["ware_id"] = "1259094696"
+    #app_param["fields"] = "pack_listing,desc,offline_time,weight,property_alias,specialWet,payFirst,cubage,"\
+    #  "ware_big_small_model,imported,transport_id,creator,appliancesCard,online_time,title,"\
+    #  "jd_price,shop_categorys,ware_id,created,healthProduct,ware_pack_type,upc_code,"\
+    #  "ware_status,wrap,item_num,logo,shop_id,cost_price,canVat,status,brand_id,"\
+    #  "stock_num,cid,shelf_life_days,modified,serialNo,shelfLife,spu_id,market_price,"\
+    #  "ad_content,service,skus,attributes,vender_id,producter"
+    app_param["fields"] = "ware_id,cid,stock_num"
 
     @params["360buy_param_json"] = JSON.generate(app_param)
   end
@@ -76,16 +75,18 @@ class Order
       "#{key_value[0]}=#{key_value[1]}"
     end
 
+    # Concate to uri
+    uri = parameters.reduce do |uri_str, param|
+      uri_str = "#{uri_str}&#{param}"
+    end
+    #puts "uri: #{uri}"
+
     sign_params = parameters.reduce(:+)
     sign_params = APP_SECRET + sign_params + APP_SECRET
 
     # Get MD5 sign
     sign = Digest::MD5.hexdigest(sign_params).upcase!
-
-    # Concate to uri
-    uri = parameters.reduce do |uri_str, param|
-      uri_str = "#{uri_str}&#{param}"
-    end
+    # puts "sign: #{sign}"
 
     "#{uri}&sign=#{sign}"
   end
