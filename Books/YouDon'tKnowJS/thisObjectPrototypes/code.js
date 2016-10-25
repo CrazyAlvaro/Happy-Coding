@@ -88,3 +88,14 @@ var obj = {
 [1, 2, 3].forEach( foo, obj ); // 1 awesome  2 awesome  3 awesome
 
 CHAPTER 3
+
+// Built-in Objects
+// String, Number, Boolean, Object, Function, Array, Data, RegExp, Error
+
+// Object property names are always string
+
+CHAPTER 4
+
+Classes are a design pattern
+
+CHAPTER 5
