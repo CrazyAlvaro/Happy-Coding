@@ -1,0 +1,18 @@
+extends ../../common/layout
+
+block link
+  link(href="/static/font-awesome.css" rel="stylesheet")
+
+block content
+  include ../../common/simpleHeader
+  .md-content
+    .md-form-container
+      form(action="/auth/organization/signin" method="POST")
+        .md-organization-signin-form.md-form
+          .md-form-title 你的企业域名
+          .md-form-section
+            input.md-form-input
+            span .madadata.com
+          button.md-btn-primary.md-form-btn(type="submit")
+            span 继续
+            i(class="fa fa-arrow-right" aria-hidden="true")

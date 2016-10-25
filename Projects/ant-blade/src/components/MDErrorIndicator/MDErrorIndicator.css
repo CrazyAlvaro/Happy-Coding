@@ -1,0 +1,12 @@
+:local .error {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .errorText {
+    font-size: 2em;
+    font-weight: 200;
+    margin: 20px;
+  }
+}

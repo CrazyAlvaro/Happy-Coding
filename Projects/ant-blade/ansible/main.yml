@@ -1,0 +1,149 @@
+---
+# 部署脚本
+
+- name: Deploy containers
+  hosts: all
+  become: yes
+
+  # if your target machine already has the latest docker installed
+  #  you can skip this role
+  roles:
+    - angstwad.docker_ubuntu
+
+  tasks:
+
+    - name: postgres data container
+      docker_container:
+        name: pg_data
+        image: busybox
+        volumes:
+          - /var/lib/postgresql
+
+    - name: postgres
+      docker_container:
+        name: postgres
+        image: postgres
+        state: started
+        ports:
+          - "5432:5432"
+        volumes_from:
+          - pg_data
+        env:
+          POSTGRES_USER: "{{ POSTGRES_USER }}"
+          POSTGRES_PASSWORD: "{{ POSTGRES_PASSWORD }}"
+          POSTGRES_DB: "{{ POSTGRES_DB }}"
+        restart_retries: 10
+        restart_policy: always
+
+    - name: mongo data container
+      docker_container:
+        name: mongo_data
+        image: busybox
+        volumes:
+          # note that this is data volume
+          # thus we don't mount to host filesystem
+          - /data
+
+    - name: mongo
+      docker_container:
+        name: mongo
+        image: mongo
+        state: started
+        ports:
+          - "27017:27017"
+        volumes_from:
+          - mongo_data
+        restart_retries: 10
+        restart_policy: always
+
+    - name: login to registry
+      shell: >
+             docker login
+             -p '{{ registry_pass }}'
+             -u {{ registry_user }}
+
+    - name: db migrate using ant-blade
+      shell: >
+             docker run -i --rm
+             --link postgres
+             -e "NODE_ENV=production"
+             -e "POSTGRES_HOST=postgres"
+             -e "POSTGRES_PORT=5432"
+             -e "POSTGRES_USER={{ POSTGRES_USER }}"
+             -e "POSTGRES_PASSWORD={{ POSTGRES_PASSWORD }}"
+             -e "POSTGRES_DB={{ POSTGRES_DB }}"
+             mada/ant-blade:v0.2.11
+             npm run db:migrate -- --env production
+
+    - name: installing default admin and roles
+      shell: >
+             docker run -i --rm
+             --link mongo
+             -e "NODE_ENV=production"
+             mada/ant-blade:v0.2.11
+             npm run db:installDefaults
+
+    - name: rotor
+      docker_container:
+        name: rotor
+        image: mada/ant-rotor:v0.1.9
+        links:
+          - postgres
+        ports:
+          - "5000:5000"
+        env:
+          MSSQL_SERVER: "{{ MSSQL_SERVER }}"
+          MSSQL_USER: "{{ MSSQL_USER }}"
+          MSSQL_PASSWORD: "{{ MSSQL_PASSWORD }}"
+          MSSQL_DBNAME: "{{ MSSQL_DBNAME }}"
+          PG_HOST: postgres
+          PG_DBNAME: "{{ POSTGRES_DB }}"
+          PG_USER: "{{ POSTGRES_USER }}"
+          PG_PASSWORD: "{{ POSTGRES_PASSWORD }}"
+        restart_retries: 10
+        restart_policy: always
+
+    - name: postgrest
+      docker_container:
+        name: postgrest
+        image: begriffs/postgrest
+        links:
+          - postgres
+        ports:
+          - "3001:3000"
+        env:
+          # this is for the legacy version 1 back-compat
+          PG_PORT_5432_TCP_ADDR: postgres
+          PG_PORT_5432_TCP_PORT: 5432
+          PG_ENV_POSTGRES_USER: "{{ POSTGRES_USER }}"
+          PG_ENV_POSTGRES_PASSWORD: "{{ POSTGRES_PASSWORD }}"
+          POSTGREST_ANONYMOUS: "{{ POSTGRES_USER }}"
+          POSTGREST_JWT_SECRET: 55c8e526d0f905e19a6f8544c2fee8a5
+        restart_retries: 10
+        restart_policy: always
+
+    - name: run ant-blade
+      docker_container:
+        name: ant-blade
+        image: mada/ant-blade:v0.2.11
+        state: started
+        links:
+          - mongo
+          - postgrest
+          - postgres
+          - rotor
+        env:
+          NODE_ENV: production
+          API_HOST: postgrest
+          API_PORT: 3000
+          ETL_HOST: rotor
+          ETL_PORT: 5000
+          POSTGRES_HOST: postgres
+          POSTGRES_PORT: 5432
+          POSTGRES_USER: "{{ POSTGRES_USER }}"
+          POSTGRES_PASSWORD: "{{ POSTGRES_PASSWORD }}"
+          POSTGRES_DB: "{{ POSTGRES_DB }}"
+        ports:
+          - "80:3000"
+        restart_retries: 10
+        restart_policy: always

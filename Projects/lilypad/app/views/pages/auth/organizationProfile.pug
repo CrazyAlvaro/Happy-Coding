@@ -1,0 +1,17 @@
+extends ../../common/layout
+
+block link
+  link(href="/static/font-awesome.css" rel="stylesheet")
+
+block content
+  include ../../common/header
+  include ../../common/leftNav
+  .md-content-wrapper
+    .md-content
+      h1 organization page
+      each colleague in colleagues
+        div #{colleague.username}
+        div #{colleague.email}
+
+block scripts
+  script(type="application/javascript" src="/static/bundle.js")

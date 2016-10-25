@@ -1,0 +1,43 @@
+:local .sheets-overview {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+
+  flex-grow: 1;
+
+  .sheet {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    min-width: 300px;
+    min-height: 300px;
+    box-shadow: 1px 1px 3px #888;
+    background-color: white;
+    border-radius: 5px;
+    border-top: 15px solid #169548;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+    .link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: inherit;
+      min-height: inherit;
+      color: black;
+      font-size: 25px;
+      text-decoration: none;
+    }
+    .link:hover {
+      font-size: 25px;
+      color: white;
+      background-color: #169548;
+      transition: 0.3s;
+    }
+  }
+  .sheet:hover {
+    box-shadow: 2px 2px 6px #888;
+  }
+}

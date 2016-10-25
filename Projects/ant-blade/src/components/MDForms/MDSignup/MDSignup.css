@@ -1,0 +1,5 @@
+/* this is only for fetch the unique id provided by react */
+:local #real-name { take: id; }
+:local #username { take: id; }
+:local #password { take: id; }
+:local #email { take: id; }

@@ -1,0 +1,44 @@
+[
+  {
+    "id": "93845730498",
+    "name": "app1",
+    "type": "dashboard",
+    "title": "app1 board",
+    "description": "app1 board of anonymous user",
+    "cards": [
+      {
+        "id": "11413241234",
+        "appId": "card"
+      },
+      {
+        "id": "12837129378",
+        "appId": "card"
+      },
+      {
+        "id": "12837129379",
+        "appId": "card"
+      }
+    ],
+    "cardsInformations": [
+      {
+        "id": "11413241234",
+        "size": "large"
+      },
+      {
+        "id": "12837129378",
+        "size": "medium"
+      },
+      {
+        "id": "12837129379",
+        "size": "medium"
+      }
+    ],
+    "order": [
+      "12837129379",
+      "12837129378",
+      "11413241234"
+    ],
+    "created": "20160731T12:00:00",
+    "updated": "20160731T12:00:00"
+  }
+]

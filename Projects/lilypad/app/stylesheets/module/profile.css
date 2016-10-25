@@ -1,0 +1,53 @@
+
+.md-profile
+  @include flex(center, flex-start)
+  @include flex-flow(column, nowrap)
+  position: relative;
+  height: inherit;
+  width: inherit;
+  .md-profile-header
+    height: $profile-header-height
+    width: inherit
+    background-color: white
+  .md-profile-avatar
+    position: absolute;
+    left: 3rem
+    top: calc($profile-header-height - $profile-avatar-size / 2)
+    width: $profile-avatar-size
+    height: $profile-avatar-size
+    border-radius: calc($profile-avatar-size / 2)
+    border: 2px solid rgba(255, 255, 255, 0.4)
+    transition: linear 0.25s
+    &:hover
+      border: 2px solid rgba(18, 18, 18, 0.4)
+  .md-profile-body
+    @include flex(center, flex-start)
+    height: calc(100vh - $header-height - $profile-header-height)
+    width: inherit;
+    .md-profile-kpi-bar
+      @include flex(center, flex-start)
+      @include flex-flow(column, nowrap)
+      box-sizing: border-box
+      width: $profile-kpi-bar-width
+      height: inherit
+      background-color: #eee
+      padding-top: calc($profile-avatar-size / 2)
+      .md-profile-kpi
+        @include text-center($profile-kpi-height)
+        text-align: center;
+        margin-top: 1rem
+        width: inherit
+        color: #A9A9A9
+        background-color: white
+    .md-profile-content
+      height: inherit
+      background-color: #D3D3D3
+      flex-grow: 1
+      @include flex(center, center)
+      /* TODO: don't have to use card here*/
+      .md-profile-content-card
+        @include card(10rem, 3rem)
+        @include text-center(3rem)
+        text-align: center
+        margin: 5px 5px
+        background-color: white

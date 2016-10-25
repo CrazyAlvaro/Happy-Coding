@@ -1,0 +1,11 @@
+bower_components/
+node_modules/
+dist/
+test/
+data/
+tmp/
+.nyc_output/
+ansible/
+circle.yml
+devServer.js
+docker-compose.yml

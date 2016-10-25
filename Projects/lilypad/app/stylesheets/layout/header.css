@@ -1,0 +1,157 @@
+@define-placeholder basic-header
+  width: inherit
+  height: $header-height
+
+.md-header
+  @extend basic-header
+  @include flex-justify-content(space-between)
+  box-sizing: border-box
+  background-color: $header-background-color
+  border-bottom: $header-border-width solid $border-color
+
+.md-header-part-left
+  @extend basic-header
+  @include flex-justify-content(flex-start)
+
+.md-header-logo
+  @extend basic-header
+  margin-left: 1.5rem
+  height: calc($header-height - 2 * $header-border-width)
+
+.md-header-madadata-logo
+  @extend basic-header
+  @include text-center(calc(($header-height - 2 * $header-border-width) / 1.5))
+  margin: 0 .5rem
+  font-size: 25px
+
+.md-left-nav-toggle-icon
+  color: $header-icon-color
+  font-size: $header-icon-size
+  margin: $header-icon-margin
+  &:hover
+    color: $header-icon-hover-color
+    cursor: pointer
+
+.md-header-part-right
+  @extend basic-header
+  @include flex-justify-content(flex-start)
+
+.md-header-icon
+  @extend basic-header
+  @include flex(center, center)
+  width: $header-icon-size
+  height: $header-icon-size
+  font-size: $header-icon-size
+  margin: $header-icon-margin
+  color: $header-icon-color
+  &:hover
+    color: $header-icon-hover-color
+    cursor: pointer
+
+.md-header-avatar
+  @extend no-user-select
+  display: inline-block
+  border-radius: 50%
+  border: 2px solid rgba(255, 255, 255, 0.4)
+  transition: linear 0.25s
+  height: $header-icon-size
+  width: $header-icon-size
+  margin: $header-icon-margin
+  &:hover
+    border: 2px solid rgba(18, 18, 18, 0.4)
+
+  img
+    height: inherit
+    width: inherit
+    border-radius: 50%
+
+.md-header-panel
+  @include flex-flow(row, wrap)
+  position: fixed
+  top: calc($header-height + $header-dialog-margin-top)
+  right: calc($header-icon-size * 1.5 + $header-icon-margin-horizontal * 3)
+  overflow: hidden
+  height: 0px
+  width: $header-panel-width
+  border-radius: $header-dialog-border-radius
+  background-color: $header-dialog-background-color
+  transition: all .3s ease
+  z-index: $pop-up-z-index
+  .item
+    width: calc($header-panel-width / 3)
+    color: $header-panel-item-color
+    @include flex(center, center)
+    @include flex-flow(column nowrap)
+    &:hover
+      color: $header-panel-item-hover-color
+    .font-icon
+      font-size: $header-panel-item-icon-font-size
+    .title
+      margin-top: $header-panel-item-title-margin-top
+      font-size: $header-panel-item-title-font-size
+
+#md-header-panel-toggler
+  &:checked + .md-header-panel
+    height: $header-panel-height
+
+.md-header-personal-settings
+  position: fixed
+  top: calc($header-height + $header-dialog-margin-top)
+  right: calc($header-icon-size * 0.5 + $header-icon-margin-horizontal)
+  height: 0px
+  width: $header-personal-settings-width
+  overflow: scroll
+  border-radius: $header-dialog-border-radius
+  background-color: $header-dialog-background-color
+  transition: all .3s ease
+  z-index: $pop-up-z-index
+  .user-info
+    @include flex-justify-content(flex-start)
+    height: $header-personal-settings-user-info-height
+    .avatar
+      width: $header-personal-settings-user-info-avatar-size
+      height: $header-personal-settings-user-info-avatar-size
+      border-radius: 50%
+      margin: $header-personal-settings-user-info-avatar-margin
+      display: inline-block
+      border: 2px solid rgba(255, 255, 255, 0)
+      transition: linear 0.25s
+      &:hover
+        border: 2px solid rgba(18, 18, 18, 0.4)
+      img
+        height: inherit
+        width: inherit
+        border-radius: 50%
+    .info
+      @include flex-flow(column, nowrap)
+      @include flex(flex-start, space-around)
+      height: $header-personal-settings-user-info-avatar-size
+      color: $header-personal-settings-user-info-color
+      .name
+        font-size: $header-personal-settings-user-info-name-font-size
+      .email
+        font-size: $header-personal-settings-user-info-email-font-size
+  .button-group
+    @include flex-justify-content(flex-start)
+    height: $header-personal-settings-button-group-height
+    .md-btn
+      width: calc($header-personal-settings-width / 2)
+      height: inherit
+      line-height: $header-personal-settings-button-group-height
+      @include md-button-variant(
+        $header-personal-settings-button-group-color,
+        $header-dialog-section-color
+      )
+  .message-center-title
+    padding: 8px 20px
+    color: white
+    height: $header-personal-settings-message-center-title-height
+    line-height: $header-personal-settings-message-center-title-height
+  .message-section
+    width: inherit;
+    background-color: $header-dialog-section-color
+
+
+#md-header-personal-settings-toggler
+  &:checked + .md-header-personal-settings
+    height: $header-personal-settings-height

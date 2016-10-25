@@ -1,0 +1,41 @@
+@define-placeholder basic-footer
+  width: inherit
+  height: $footer-height
+
+.md-footer
+  @extend basic-footer
+  @include flex-justify-content(space-between)
+  background-color: $footer-color
+
+.md-footer-part-left
+  @extend basic-footer
+  @include flex(flex-start, center)
+  @include flex-flow(column, nowrap)
+
+.md-footer-text-row
+  margin-bottom: 0.3rem
+  margin-left: $footer-margin-horizontal
+  color: white
+  @include flex-justify-content(flex-start)
+
+.md-footer-text-title
+  font-size: 1rem
+
+.md-footer-text-content
+  color: white
+  font-size: 0.8rem
+  margin-left: 1rem
+
+
+.md-footer-part-right
+  @extend basic-footer
+  @include flex(center, center)
+
+.md-footer-logo
+  width: 33px
+  height: 25px
+
+.md-footer-corp-icon
+  color: white
+  font-size: 0.8rem
+  margin-right: $footer-margin-horizontal

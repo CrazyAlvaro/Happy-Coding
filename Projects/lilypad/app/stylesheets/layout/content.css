@@ -1,0 +1,9 @@
+.md-content-wrapper
+  transition: $left-nav-transition-duration
+
+.md-content
+  width: 100%
+  height: $content-height
+  min-height: $content-height
+  background-color: $content-background-color
+  overflow: auto

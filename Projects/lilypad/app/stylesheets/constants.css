@@ -1,0 +1,124 @@
+/* ==========================================================================
+   MD stylesheet variables
+   ========================================================================== */
+
+/**
+ * Table of Contents:
+ *  0. Global
+ *  1. Colors
+ *  2. Buttons
+ */
+/* 0. Globals
+   ========================================================================== */
+$fontFamily: sans-serif
+$lineHeight: 1.15
+$pop-up-z-index: 1
+
+/* 1. Colors
+   ========================================================================== */
+$primary-color: #4A90E2
+$info-color: #46B8DA
+$error-color: #D9534F
+$success-color: #50E3C2
+$border-color: #A9A9A9
+
+/* 3. Buttons
+   ========================================================================== */
+
+// shared styles
+$button-border: none
+$button-height: 36px
+$button-font-size: 14px
+$button-padding: 0rem 2rem;
+$button-border-radius: 0px;
+$button-box-shadow: 0px 0px 1px 0px rgba(0, 0, 0, 0.5);
+$button-default-text-color: black
+$button-default-background-color: white
+$button-primary-text-color: #FFFFFF
+$button-primary-background-color: $primary-color
+$button-info-text-color: #FFFFFF
+$button-info-background-color: $info-color
+$button-danger-text-color: #FFFFFF
+$button-danger-background-color: #D9534F
+
+/* 4. lists
+    ========================================================================== */
+
+$list-icon-font-size: 9px
+$list-font-size: 14px
+$list-item-font-size: 12px
+$list-close-color: #A9A9A9
+$list-open-color: #FFFFFF
+
+/* 5. leftNav
+    ========================================================================== */
+$left-nav-color: white
+$left-nav-background-color: #2B3B54
+$left-nav-transition-duration: .5s
+$left-nav-width: 12.5rem
+$left-nav-padding-horizontal: 1rem
+$left-nav-divider-color: #8E8E8E
+$left-nav-title-font-size: 16px
+
+/* 6. Layouts
+    ========================================================================== */
+/* Header */
+$header-height: 50px
+$header-border-width: 1px
+$header-background-color: white
+$header-icon-size: 28px
+$header-icon-margin-horizontal: 10px
+$header-icon-margin: 0px $header-icon-margin-horizontal
+$header-icon-color: #6E6E6E
+$header-icon-hover-color: black
+$header-dialog-margin-top: 3px
+$header-dialog-border-radius: 5px
+$header-dialog-background-color: #666666
+$header-dialog-section-color: #848383
+$header-panel-width: 333px
+$header-panel-height: 130px
+$header-panel-item-color: #E3E3E3
+$header-panel-item-hover-color: white
+$header-panel-item-icon-font-size: 50px
+$header-panel-item-title-font-size: 15px
+$header-panel-item-title-margin-top: 10px
+$header-personal-settings-width: 341px
+$header-personal-settings-height: 436px
+$header-personal-settings-user-info-height: 100px
+$header-personal-settings-user-info-color: white
+$header-personal-settings-user-info-avatar-size: 60px
+$header-personal-settings-user-info-avatar-margin: 25px 20px
+$header-personal-settings-user-info-name-font-size: 25px
+$header-personal-settings-user-info-email-font-size: 15px
+$header-personal-settings-button-group-height: 31px
+$header-personal-settings-button-group-color: white
+$header-personal-settings-message-center-title-height: 30px
+/* Content */
+$content-height: calc(100vh - $header-height)
+$content-background-color: white
+/* Footer */
+$footer-color: #2B3B54
+$footer-height: 80px
+$footer-margin-horizontal: 2rem
+/* Profile */
+$profile-header-height: 9rem
+$profile-avatar-size: 10rem
+$profile-avatar-left: 3rem
+$profile-avatar-top: 4rem
+$profile-kpi-bar-width: 15rem
+$profile-kpi-height: 3rem
+
+/* 7. Forms
+    ========================================================================== */
+$form-container-background-color: #F0F0F0
+$form-title-font-size: 21px
+$form-section-height: 38px
+$form-link-font-size: 10px
+$form-input-border-radius: 3px
+$form-input-border-color: #E3E3E3
+$form-input-font-size: 15px
+$form-input-left-padding: 10px
+$form-checkbox-font-size: 10px
+$form-checkbox-color: #A9A9A9
+$form-btn-font-size: 18px
+$form-flash-message-font-size: 12px

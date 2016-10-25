@@ -1,0 +1,16 @@
+extends ../../common/layout
+
+block link
+  link(href="/static/font-awesome.css" rel="stylesheet")
+
+block content
+  include ../../common/header
+  include ../../common/leftNav
+  include ../../common/message
+  .md-content-wrapper
+    .md-content
+      h1 home
+      div#home
+
+block scripts
+  script(type='application/javascript' src='/static/bundle.js')

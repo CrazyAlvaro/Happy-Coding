@@ -1,0 +1,35 @@
+.md-btn
+  display: inline-block
+  border: $button-border
+  border-radius: $button-border-radius
+  height: $button-height
+  line-height: $button-height
+  padding: $button-padding
+  box-shadow: $button-box-shadow
+  font-size: $button-font-size
+  text-align: center
+  outline: none
+  cursor: pointer
+  white-space: nowrap
+  user-select: none
+
+  &[disabled]
+    opacity: .65
+    &:hover
+      cursor: not-allowed
+
+.md-btn-default
+  @extend .md-btn
+  @include md-button-variant($button-default-text-color, $button-default-background-color)
+
+.md-btn-primary
+  @extend .md-btn
+  @include md-button-variant($button-primary-text-color, $button-primary-background-color)
+
+.md-btn-info
+  @extend .md-btn
+  @include md-button-variant($button-info-text-color, $button-info-background-color)
+
+.md-btn-danger
+  @extend .md-btn
+  @include md-button-variant($button-danger-text-color, $button-danger-background-color)

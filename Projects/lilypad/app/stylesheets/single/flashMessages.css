@@ -1,0 +1,41 @@
+.md-flash-message
+  position: absolute
+  top: 60px
+  right: 30px
+  color: rgba(255, 255, 255, 0.7)
+  border-radius: 4px
+  font-weight: 400
+  display: flex
+  align-items: stretch
+  padding-right: 20px
+  perspective: 1000px
+  animation: md-flash-message 4500ms cubic-bezier(0, 0.6, 0.35, 1.4) forwards
+
+  .icon
+    padding: 15px 20px
+    border-radius: 4px 0px 0px 4px
+    overflow: hidden
+
+    i
+      opacity: 0
+      animation: md-flash-message-icon-i 400ms cubic-bezier(0, 0.6, 0.35, 1.4) 450ms forwards
+
+  .text
+    background: rgba(0, 0, 0, 0.8)
+    padding: 0 20px
+    display: flex
+    align-items: center
+    border-radius: 0px 4px 4px 0px
+    opacity: 1
+
+.md-flash-message-error
+  @extend .md-flash-message
+  @include md-flash-message-variant(white, $error-color)
+
+.md-flash-message-info
+  @extend .md-flash-message
+  @include md-flash-message-variant(white, $info-color)
+
+.md-flash-message-success
+  @extend .md-flash-message
+  @include md-flash-message-variant(white, $success-color)

@@ -1,0 +1,33 @@
+:local .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  min-width: 50px;
+  max-width: 50px;
+  background: rgb(180, 180, 180);
+  color: black;
+  box-shadow: 5px #169548;
+
+
+  .link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 0.2px solid white;
+    font-size: 16px;
+    text-decoration: none;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #169548;
+    border-radius: 2px;
+    color: #169548;
+    background-color: white;
+  }
+
+  .activeLink {
+    background: #169548;
+    color: white;
+    transition: 0.3s;
+  }
+}

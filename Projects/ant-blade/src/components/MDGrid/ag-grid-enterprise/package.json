@@ -1,0 +1,100 @@
+{
+  "_args": [
+    [
+      "ag-grid-enterprise",
+      "/Users/hezheng/zhenghe/mada/ant-blade"
+    ]
+  ],
+  "_from": "ag-grid-enterprise@latest",
+  "_id": "ag-grid-enterprise@4.2.10",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/ag-grid-enterprise",
+  "_nodeVersion": "6.0.0",
+  "_npmOperationalInternal": {
+    "host": "packages-12-west.internal.npmjs.com",
+    "tmp": "tmp/ag-grid-enterprise-4.2.10.tgz_1465811303419_0.4257172157522291"
+  },
+  "_npmUser": {
+    "email": "niall.crosby@gmail.com",
+    "name": "ceolter"
+  },
+  "_npmVersion": "3.8.6",
+  "_phantomChildren": {},
+  "_requested": {
+    "name": "ag-grid-enterprise",
+    "raw": "ag-grid-enterprise",
+    "rawSpec": "",
+    "scope": null,
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/ag-grid-enterprise/-/ag-grid-enterprise-4.2.10.tgz",
+  "_shasum": "2f5f2f3180fd66807c9c827932c8cb31c6a7e8fe",
+  "_shrinkwrap": null,
+  "_spec": "ag-grid-enterprise",
+  "_where": "/Users/hezheng/zhenghe/mada/ant-blade",
+  "author": {
+    "email": "niall.crosby@ag-grid.com",
+    "name": "Niall Crosby"
+  },
+  "bugs": {
+    "url": "https://github.com/ceolter/ag-grid-enterprise/issues"
+  },
+  "dependencies": {},
+  "description": "ag-Grid Enterprise Features",
+  "devDependencies": {
+    "css-loader": "0.23.1",
+    "gulp": "3.9.0",
+    "gulp-clean": "0.3.1",
+    "gulp-header": "1.7.0",
+    "gulp-typescript": "2.10.0",
+    "merge2": "0.3.6",
+    "style-loader": "0.13.0",
+    "typescript": "1.7.5",
+    "webpack": "1.12.12",
+    "webpack-stream": "3.1.0"
+  },
+  "directories": {},
+  "dist": {
+    "shasum": "2f5f2f3180fd66807c9c827932c8cb31c6a7e8fe",
+    "tarball": "https://registry.npmjs.org/ag-grid-enterprise/-/ag-grid-enterprise-4.2.10.tgz"
+  },
+  "gitHead": "e7f6fd5d7e1e43510db1efa85d5f1f73135e1d89",
+  "homepage": "http://www.ag-grid.com/",
+  "keywords": [
+    "grid",
+    "data",
+    "table",
+    "enterprise"
+  ],
+  "license": "Commercial",
+  "main": "main.js",
+  "maintainers": [
+    {
+      "email": "niall.crosby@gmail.com",
+      "name": "ceolter"
+    },
+    {
+      "email": "sean@thelandsmans.com",
+      "name": "seanlandsman"
+    }
+  ],
+  "name": "ag-grid-enterprise",
+  "optionalDependencies": {},
+  "peerDependencies": {
+    "ag-grid": "4.2.x"
+  },
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ceolter/ag-grid-enterprise.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "4.2.10"
+}

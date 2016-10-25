@@ -1,0 +1,50 @@
+$md-left-nav-icon-hover-color: #E3E3E3
+$md-left-nav-section-item-padding-bottom: 10px
+
+#md-left-nav-toggler
+  display: none
+  &:checked + .md-left-nav
+    left: 0px
+    transition: $left-nav-transition-duration
+  &:checked ~ .md-content-wrapper
+    margin-left: $left-nav-width
+    transition: $left-nav-transition-duration
+
+.md-left-nav
+  position: fixed
+  box-sizing: border-box
+  left: -$left-nav-width
+  color: $left-nav-color
+  background-color: $left-nav-background-color
+  padding: 5px $left-nav-padding-horizontal
+  height: calc(100vh - $header-height)
+  width: $left-nav-width
+  transition: $left-nav-transition-duration
+
+.md-left-nav-divider
+  height: 2px
+  width: calc($left-nav-width - 2 * $left-nav-padding-horizontal)
+  background-color: $left-nav-divider-color
+
+.md-left-nav-section-title
+  @extend no-user-select
+  font-size: $left-nav-section-title-font-size
+  padding-left: $left-nav-padding-horizontal
+  padding-bottom: 3px
+
+.md-left-nav-top-section
+  @include flex-justify-content(flex-start)
+  @extend no-user-select
+  margin-top: 15px
+  margin-bottom: 3rem
+  .md-left-nav-logo
+    width: 33px
+    height: 25px
+
+  .md-left-nav-corp-name
+    font-size: 20px
+    margin-left: 10px
+
+.md-left-nav-section
+  margin-top: 15px
+  margin-bottom: 3rem

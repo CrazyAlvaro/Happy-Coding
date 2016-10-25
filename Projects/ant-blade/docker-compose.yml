@@ -1,0 +1,58 @@
+---
+# this builds and runs ant-blade against postgres and postgrest
+# TODO: volumns
+version: '2'
+services:
+  ant-blade:
+    image: mada/ant-blade
+    depends_on:
+      - postgrest
+      - mongo
+    links:
+      - postgres
+      - postgrest
+      - mongo
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - API_HOST=postgrest
+      - API_PORT=3000
+      - JWT_SECRET=55c8e526d0f905e19a6f8544c2fee8a5
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=5432
+      - POSTGRES_DB=ant_blade_db
+      - POSTGRES_USER=ant_blade
+      - POSTGRES_PASSWORD=61393eceeeff09bbbb154bf7158bbf2a
+
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
+
+  postgrest:
+    image: begriffs/postgrest
+    depends_on:
+      - postgres
+    links:
+      - postgres
+    ports:
+      - "3001:3000"
+    environment:
+      # this is for the legacy version 1 back-compat
+      - PG_PORT_5432_TCP_ADDR=postgres
+      - PG_PORT_5432_TCP_PORT=5432
+      # these are for postgres inter-op
+      - PG_ENV_POSTGRES_USER=ant_blade
+      - PG_ENV_POSTGRES_PASSWORD=61393eceeeff09bbbb154bf7158bbf2a
+      - POSTGREST_ANONYMOUS=anom
+      - POSTGREST_JWT_SECRET=55c8e526d0f905e19a6f8544c2fee8a5
+
+  # note that ideally you will bring up the database software
+  # on it's own because the db-migrate will have to run manually
+  postgres:
+    image: postgres
+    environment:
+      - POSTGRES_USER=ant_blade
+      - POSTGRES_DB=ant_blade_db
+      - POSTGRES_PASSWORD=61393eceeeff09bbbb154bf7158bbf2a

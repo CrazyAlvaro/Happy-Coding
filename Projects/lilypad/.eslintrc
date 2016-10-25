@@ -1,0 +1,10 @@
+{
+  "extends": "airbnb",
+  "plugins": [
+      "react"
+  ],
+  "rules": {
+    "new-cap": ["error", { "capIsNewExceptions": ["Router"] }]
+  },
+  "parser": "babel-eslint"
+}

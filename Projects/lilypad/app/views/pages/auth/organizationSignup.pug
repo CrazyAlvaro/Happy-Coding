@@ -1,0 +1,15 @@
+extends ../../common/layout
+
+block content
+  include ../../common/simpleHeader
+  .md-content
+    .md-form-container
+      form(action="/auth/organization/signup" method="POST")
+        .md-organization-signup-form.md-form
+          .md-form-title 注册企业
+          .md-form-section
+            input.md-form-input
+            span .madadata.com
+          .md-form-section
+            a.md-form-link(href="/auth/organization/signin") 已有企业，直接加入
+            button.md-btn-primary.form-btn(type="submit") 注册企业

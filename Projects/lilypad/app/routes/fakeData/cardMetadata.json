@@ -1,0 +1,395 @@
+[
+  {
+    "id": "12837129379",
+    "type": "chart",
+    "created": "2016-08-05T08:28:31.103Z",
+    "updated": "2016-08-05T08:29:11.679Z",
+    "title": "嘉定工业园-1",
+    "responsibleUserId": "13215547328",
+    "description": "嘉定工业园区土地分析柱状图",
+    "cardConfig": {
+      "title": "嘉定工业园区土地分析",
+      "chartType": "bar",
+      "chartXLabel": "类目",
+      "chartYLabel": "排放量",
+      "chartXType": "string",
+      "chartYType": "number",
+      "dataMappings": [
+        {
+          "description": [
+            {
+              "key": "juzhu",
+              "displayName": "居住"
+            },
+            {
+              "key": "gongongsheshi",
+              "displayName": "公共设施"
+            },
+            {
+              "key": "yanfagongye",
+              "displayName": "研发工业"
+            },
+            {
+              "key": "lvhua",
+              "displayName": "绿化"
+            }
+          ],
+          "position": "center",
+          "dataAccessorId": "d-1"
+        },
+        {
+          "description": [
+            {
+              "key": "xiaoshoue",
+              "displayName": "销售额"
+            },
+            {
+              "key": "zhuanhualv",
+              "displayName": "转化率"
+            },
+            {
+              "key": "tongbizengzhang",
+              "displayName": "同比增长"
+            },
+            {
+              "key": "huanbizengzhang",
+              "displayName": "环比增长"
+            }
+          ],
+          "position": "right",
+          "dataAccessorId": "d-2"
+        }
+      ]
+    },
+    "dataAccessors": [
+      {
+        "id": "d-1",
+        "type": "SELECT",
+        "config": {
+          "table": "GovernmentLand",
+          "values": [
+            {
+              "type": "COLUMN",
+              "values": [
+                "juzhu"
+              ]
+            },
+            {
+              "type": "COLUMN",
+              "values": [
+                "gonggongsheshi"
+              ]
+            },
+            {
+              "type": "COLUMN",
+              "values": [
+                "yanfagongye"
+              ]
+            },
+            {
+              "type": "COLUMN",
+              "values": [
+                "lvdi"
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "d-2",
+        "type": "SELECT",
+        "config": {
+          "table": "Sales",
+          "values": [
+            {
+              "type": "COLUMN",
+              "values": [
+                "xiaoshoue"
+              ]
+            },
+            {
+              "type": "COLUMN",
+              "values": [
+                "zhuanhualv"
+              ]
+            },
+            {
+              "type": "COLUMN",
+              "values": [
+                "tongbizengzhang"
+              ]
+            },
+            {
+              "type": "COLUMN",
+              "values": [
+                "huanbizengzhang"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "12837129378",
+    "type": "chart",
+    "created": "2016-08-05T08:28:31.103Z",
+    "updated": "2016-08-05T08:29:11.679Z",
+    "title": "嘉定工业园-1",
+    "responsibleUserId": "13215547328",
+    "description": "嘉定工业园区土地分析柱状图",
+    "cardConfig": {
+      "title": "嘉定工业园区土地分析",
+      "chartType": "bar",
+      "chartXLabel": "类目",
+      "chartYLabel": "排放量",
+      "chartXType": "string",
+      "chartYType": "number",
+      "dataMappings": [
+        {
+          "description": [
+            {
+              "key": "juzhu",
+              "displayName": "居住"
+            },
+            {
+              "key": "gongongsheshi",
+              "displayName": "公共设施"
+            },
+            {
+              "key": "yanfagongye",
+              "displayName": "研发工业"
+            },
+            {
+              "key": "lvhua",
+              "displayName": "绿化"
+            }
+          ],
+          "position": "center",
+          "dataAccessorId": "d-3"
+        },
+        {
+          "description": [
+            {
+              "key": "xiaoshoue",
+              "displayName": "销售额"
+            },
+            {
+              "key": "zhuanhualv",
+              "displayName": "转化率"
+            },
+            {
+              "key": "tongbizengzhang",
+              "displayName": "同比增长"
+            },
+            {
+              "key": "huanbizengzhang",
+              "displayName": "环比增长"
+            }
+          ],
+          "position": "right",
+          "dataAccessorId": "d-4"
+        }
+      ]
+    },
+    "dataAccessors": [
+      {
+        "id": "d-3",
+        "type": "SELECT",
+        "config": {
+          "table": "GovernmentLand",
+          "values": [
+            {
+              "type": "COLUMN",
+              "values": [
+                "juzhu"
+              ]
+            },
+            {
+              "type": "COLUMN",
+              "values": [
+                "gonggongsheshi"
+              ]
+            },
+            {
+              "type": "COLUMN",
+              "values": [
+                "yanfagongye"
+              ]
+            },
+            {
+              "type": "COLUMN",
+              "values": [
+                "lvdi"
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "d-4",
+        "type": "SELECT",
+        "config": {
+          "table": "Sales",
+          "values": [
+            {
+              "type": "COLUMN",
+              "values": [
+                "xiaoshoue"
+              ]
+            },
+            {
+              "type": "COLUMN",
+              "values": [
+                "zhuanhualv"
+              ]
+            },
+            {
+              "type": "COLUMN",
+              "values": [
+                "tongbizengzhang"
+              ]
+            },
+            {
+              "type": "COLUMN",
+              "values": [
+                "huanbizengzhang"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "id": "11413241234",
+    "type": "chart",
+    "created": "2016-08-05T08:28:31.103Z",
+    "updated": "2016-08-05T08:29:11.679Z",
+    "title": "嘉定工业园-1",
+    "responsibleUserId": "13215547328",
+    "description": "嘉定工业园区土地分析柱状图",
+    "cardConfig": {
+      "title": "嘉定工业园区土地分析",
+      "chartType": "bar",
+      "chartXLabel": "类目",
+      "chartYLabel": "排放量",
+      "chartXType": "string",
+      "chartYType": "number",
+      "dataMappings": [
+        {
+          "description": [
+            {
+              "key": "juzhu",
+              "displayName": "居住"
+            },
+            {
+              "key": "gongongsheshi",
+              "displayName": "公共设施"
+            },
+            {
+              "key": "yanfagongye",
+              "displayName": "研发工业"
+            },
+            {
+              "key": "lvhua",
+              "displayName": "绿化"
+            }
+          ],
+          "position": "center",
+          "dataAccessorId": "d-5"
+        },
+        {
+          "description": [
+            {
+              "key": "xiaoshoue",
+              "displayName": "销售额"
+            },
+            {
+              "key": "zhuanhualv",
+              "displayName": "转化率"
+            },
+            {
+              "key": "tongbizengzhang",
+              "displayName": "同比增长"
+            },
+            {
+              "key": "huanbizengzhang",
+              "displayName": "环比增长"
+            }
+          ],
+          "position": "right",
+          "dataAccessorId": "d-6"
+        }
+      ]
+    },
+    "dataAccessors": [
+      {
+        "id": "d-5",
+        "type": "SELECT",
+        "config": {
+          "table": "GovernmentLand",
+          "values": [
+            {
+              "type": "COLUMN",
+              "values": [
+                "juzhu"
+              ]
+            },
+            {
+              "type": "COLUMN",
+              "values": [
+                "gonggongsheshi"
+              ]
+            },
+            {
+              "type": "COLUMN",
+              "values": [
+                "yanfagongye"
+              ]
+            },
+            {
+              "type": "COLUMN",
+              "values": [
+                "lvdi"
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "d-6",
+        "type": "SELECT",
+        "config": {
+          "table": "Sales",
+          "values": [
+            {
+              "type": "COLUMN",
+              "values": [
+                "xiaoshoue"
+              ]
+            },
+            {
+              "type": "COLUMN",
+              "values": [
+                "zhuanhualv"
+              ]
+            },
+            {
+              "type": "COLUMN",
+              "values": [
+                "tongbizengzhang"
+              ]
+            },
+            {
+              "type": "COLUMN",
+              "values": [
+                "huanbizengzhang"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  }
+]

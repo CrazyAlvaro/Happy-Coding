@@ -1,0 +1,28 @@
+{
+  "meta": [
+    {
+      "index": 0,
+      "type": "DOUBLE"
+    },
+    {
+      "index": 1,
+      "type": "DOUBLE"
+    },
+    {
+      "index": 2,
+      "type": "DOUBLE"
+    },
+    {
+      "index": 3,
+      "type": "DOUBLE"
+    }
+  ],
+  "data": [
+    [
+      432,
+      320,
+      72,
+      255
+    ]
+  ]
+}
