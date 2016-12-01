@@ -29,6 +29,7 @@ module.exports = {
 
   plugins: [
     new webpack.BannerPlugin("Copyright Yechen Huang."),
+    new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
       template: __dirname + "/app/index.tmp1.html"
     })
@@ -38,6 +39,7 @@ module.exports = {
     contentBase: "./public",
     colors: true,
     historyApiFallback: true,
-    inline: true
+    inline: true,
+    hot: true
   }
 };
