@@ -31,7 +31,7 @@ module.exports = {
     new webpack.BannerPlugin("Copyright Yechen Huang."),
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
-      template: __dirname + "/app/index.tmp1.html"
+      template: __dirname + "/app/index.tmpl.html"
     })
   ],
 
