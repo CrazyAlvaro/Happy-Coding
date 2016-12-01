@@ -1,10 +1,11 @@
 var webpack = require('webpack')
+var HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   devtool: 'eval-source-map',
   entry: __dirname + "/app/main.js",
   output: {
-    path: __dirname + "/public",
+    path: __dirname + "/build",
     filename: "bundle.js"
   },
 
@@ -27,7 +28,10 @@ module.exports = {
   },
 
   plugins: [
-    new webpack.BannerPlugin("Copyright Yechen Huang.")
+    new webpack.BannerPlugin("Copyright Yechen Huang."),
+    new HtmlWebpackPlugin({
+      template: __dirname + "/app/index.tmp1.html"
+    })
   ],
 
   devServer: {
