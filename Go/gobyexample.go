@@ -11,16 +11,16 @@
 //[X]  Slices
 //[X]  Maps
 //[X]  Range
-//[ ]  Functions
-//[ ]  Multiple Return Values
-//[ ]  Variadic Functions
-//[ ]  Closures
-//[ ]  Recursion
-//[ ]  Pointers
-//[ ]  Structs
-//[ ]  Methods
-//[ ]  Interfaces
-//[ ]  Errors
+//[X]  Functions
+//[X]  Multiple Return Values
+//[X]  Variadic Functions
+//[X]  Closures
+//[X]  Recursion
+//[X]  Pointers
+//[X]  Structs
+//[X]  Methods
+//[X]  Interfaces
+//[X]  Errors
 //[ ]  Goroutines
 //[ ]  Channels
 //[ ]  Channel Buffering
@@ -73,10 +73,16 @@ import "math"
 import "time"
 
 // helper functions
-// TODO
-// func print(val ...string) {
-    // fmt.Println(val...)
-// }
+func my_print(vals ...string) {
+    vals_len := len(vals)
+    for index, val := range vals {
+        fmt.Print(val)
+        if index != vals_len - 1 {
+            fmt.Print(" ")
+        }
+    }
+    fmt.Print("\n")
+}
 
 func Hello_world() {
     fmt.Printf("hello, world\n")
@@ -205,7 +211,7 @@ func Switch() {
         case int:
             fmt.Println("I'm a int")
         default:
-            fmt.Println("Don't know type %T\n", t)  // TODO: %T
+            fmt.Println("Don't know type %s\n", t)
         }
     }
     whatAmI(true)
@@ -325,7 +331,203 @@ func Range() {
     }
 }
 
+/* Functions */
+// Explicit return type
+func plus(a int, b int) int {
+    return a + b
+}
+
+func plusPlus(a, b, c int) int {
+    return a + b + c
+}
+
+func Function() {
+    res := plus(1, 2)
+    fmt.Println("1+2=", res)
+
+    res = plusPlus(1, 2, 3)
+    fmt.Println("1+2+3=", res)
+}
+func vals() (int, int) {
+    return 3, 7
+}
+
+func MultipleReturn() {
+    a, b := vals()
+    fmt.Println(a)
+    fmt.Println(b)
+
+    _, c := vals()
+    fmt.Println(c)
+}
+
+func sum(nums ...int) {
+    fmt.Print(nums, " ")
+    total := 0
+    for _, num := range nums {
+        total += num
+    }
+    fmt.Println(total)
+}
+
+func Variadic() {
+    sum(1, 2)
+    sum(1, 2, 3)
+
+    nums := []int{1, 2, 3, 4}   // nums is a slice
+    sum(nums...)                // call like this
+}
+
+func intSeq() func() int {
+    i := 0
+    return func() int {
+        i++
+        return i
+    }
+}
+
+func Closure() {
+    nextInt := intSeq()
+
+    fmt.Println(nextInt())
+    fmt.Println(nextInt())
+    fmt.Println(nextInt())
+
+    newInts := intSeq()
+    fmt.Println(newInts())
+}
+
+func fact(n int) int {
+    if n == 0 {
+        return 1
+    }
+    return n * fact(n-1)
+}
+
+func Recursion() {
+    fmt.Println(fact(7))
+}
+
+func zeroval(ival int) {
+    ival = 0
+}
+
+func zeroptr(iptr *int) {
+    *iptr = 0
+}
+
+func Pointer() {
+    i := 1
+    fmt.Println("initial:", i)
+
+    zeroval(i)
+    fmt.Println("zeroval:", i)
+
+    zeroptr(&i)
+    fmt.Println("zeroptr:", i)
+
+    fmt.Println("pointer:", &i)
+}
+
+type person struct {
+    name string
+    age int
+}
+
+func Struct() {
+    fmt.Println(person{"Bob", 20})
+
+    fmt.Println(person{name: "Alice", age: 30})
+
+    fmt.Println(person{name: "Fred"})
+
+    fmt.Println(person{age: 10})
+
+    fmt.Println(&person{name: "Ann", age: 40})
+
+    s := person{name: "Sean", age: 50}
+    fmt.Println(s.name)
+
+    sp := &s
+    fmt.Println(sp.age)
+
+    sp.age = 51
+    fmt.Println(sp.age)
+
+    fmt.Println(s)
+}
+
+type rect struct {
+    width, height int
+}
+
+func (r *rect) area() int {
+    return r.width * r.height
+}
+
+func (r rect) perim() int {
+    return 2*r.width + 2*r.height
+}
+
+func Method() {
+    r := rect{width: 10, height: 5}
+
+    fmt.Println("area: ", r.area())
+    fmt.Println("perim:", r.perim())
+
+    rp := &r
+    fmt.Println("area: ", rp.area())
+    fmt.Println("perim:", rp.perim())
+}
+
+type geometry interface {
+    area() float64
+    perim() float64
+}
+
+type rectan struct {
+    width, height float64
+}
+
+type circle struct {
+    radius float64
+}
+
+func (r rectan) area() float64 {
+    return r.width * r.height
+}
+
+func (r rectan) perim() float64 {
+    return 2*r.width + 2*r.height
+}
+
+func (c circle) area() float64 {
+    return math.Pi * c.radius * c.radius
+}
+
+func (c circle) perim() float64 {
+    return 2 * math.Pi * c.radius
+}
+
+func measure(g geometry) {
+    fmt.Println(g)
+    fmt.Println(g.area())
+    fmt.Println(g.perim())
+}
+
+func Interfaces() {
+    r := rectan{width: 3, height: 4}
+    c := circle{radius: 5}
+
+    measure(r)
+    measure(c)
+}
+
 func main() {
+    // Helper
+    // my_print("2", "3")
+
+
     // Hello_world()
     // Values()
     // Variables()
@@ -336,5 +538,15 @@ func main() {
     // Array()
     // Slices()
     // Map()
-    Range()
+    // Range()
+    // Function()
+    // MultipleReturn()
+    // Variadic()
+    // Closure()
+    // Recursion()
+    // Pointer()
+    // Struct()
+    // Method()
+    // Interfaces()
+    // errors.go
 }
