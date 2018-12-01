@@ -21,15 +21,15 @@
 //[X]  Methods
 //[X]  Interfaces
 //[X]  Errors
-//[ ]  Goroutines
-//[ ]  Channels
-//[ ]  Channel Buffering
-//[ ]  Channel Synchronization
-//[ ]  Channel Directions
-//[ ]  Select
-//[ ]  Timeouts
-//[ ]  Non-Blocking Channel Operations
-//[ ]  Closing Channels
+//[X]  Goroutines
+//[X]  Channels
+//[X]  Channel Buffering
+//[X]  Channel Synchronization
+//[X]  Channel Directions
+//[X]  Select
+//[X]  Timeouts
+//[X]  Non-Blocking Channel Operations
+//[X]  Closing Channels
 //[ ]  Range over Channels
 //[ ]  Timers
 //[ ]  Tickers
