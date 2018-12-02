@@ -30,13 +30,13 @@
 //[X]  Timeouts
 //[X]  Non-Blocking Channel Operations
 //[X]  Closing Channels
-//[ ]  Range over Channels
-//[ ]  Timers
-//[ ]  Tickers
-//[ ]  Worker Pools
-//[ ]  Rate Limiting
-//[ ]  Atomic Counters
-//[ ]  Mutexes
+//[X]  Range over Channels
+//[X]  Timers
+//[X]  Tickers
+//[X]  Worker Pools
+//[X]  Rate Limiting
+//[X]  Atomic Counters
+//[X]  Mutexes
 //[ ]  Stateful Goroutines
 //[ ]  Sorting
 //[ ]  Sorting by Functions
