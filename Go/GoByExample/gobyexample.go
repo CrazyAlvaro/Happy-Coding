@@ -37,12 +37,12 @@
 //[X]  Rate Limiting
 //[X]  Atomic Counters
 //[X]  Mutexes
-//[ ]  Stateful Goroutines
-//[ ]  Sorting
-//[ ]  Sorting by Functions
-//[ ]  Panic
-//[ ]  Defer
-//[ ]  Collection Functions
+//[X]  Stateful Goroutines
+//[X]  Sorting
+//[X]  Sorting by Functions
+//[X]  Panic
+//[X]  Defer
+//[X]  Collection Functions
 //[ ]  String Functions
 //[ ]  String Formatting
 //[ ]  Regular Expressions
