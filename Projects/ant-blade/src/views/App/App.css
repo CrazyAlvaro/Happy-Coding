@@ -1,9 +1,0 @@
-:local .container {
-  min-height: 100vh;
-  .flash-message {
-    position: absolute;
-
-    left: 50%;
-    margin-left: -150px;
-  }
-}

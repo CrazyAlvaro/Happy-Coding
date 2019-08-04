@@ -1,7 +1,0 @@
-/* The single folder contains small and single components that are styled
- * independent of its parent - such as buttons, headings, labels and tags
- */
-@import './buttons.css';
-@import './radioButton.css';
-@import './flashMessages.css';
-@import './list.css';
