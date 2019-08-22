@@ -96,3 +96,26 @@ print(speeds_result)
 ########################################
 # Joining Data
 ########################################
+# Your code here
+bigquery_experts_query = """
+                         SELECT a.owner_user_id AS user_id,
+                                COUNT(a.id) AS number_of_answers                                
+                         FROM `bigquery-public-data.stackoverflow.posts_questions` AS q
+                         INNER JOIN `bigquery-public-data.stackoverflow.posts_answers` AS a
+                             ON q.id = a.parent_id
+                         WHERE q.tags LIKE '%bigquery%'
+                         GROUP BY 1
+                         """
+
+# Set up the query
+safe_config = bigquery.QueryJobConfig(maximum_bytes_billed=10**10)
+bigquery_experts_query_job = client.query(bigquery_experts_query, safe_config) # Your code goes here
+
+# API request - run the query, and return a pandas DataFrame
+bigquery_experts_results = bigquery_experts_query_job.to_dataframe() # Your code goes here
+
+# Preview results
+print(bigquery_experts_results.head())
+
+# Check your answer
+q_5.check()
