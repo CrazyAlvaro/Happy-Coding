@@ -5,3 +5,4 @@ build
 babel.js
 *.class
 *.log
+*.pyc
