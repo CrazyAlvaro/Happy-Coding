@@ -1,5 +1,4 @@
 Everyday-Coding
-===============
+===
 
-=======
-My Daily Playground
+### Latest update: 09/11/19
