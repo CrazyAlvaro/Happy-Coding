@@ -1,4 +1,4 @@
 Everyday-Coding
 ===
 
-### Latest update: 09/11/19
+### Latest update: 09/22/19
