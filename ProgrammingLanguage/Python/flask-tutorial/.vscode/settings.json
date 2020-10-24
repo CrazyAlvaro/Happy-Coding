@@ -1,0 +1,4 @@
+{
+  "python.pythonPath": "venv/bin/python",
+  "sqlite.sqlite3": "/Users/yechenhuang/anaconda3/bin/sqlite3"
+}

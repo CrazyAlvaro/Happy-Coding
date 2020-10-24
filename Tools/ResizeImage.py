@@ -1,7 +1,8 @@
 from PIL import Image
+from multiprocessing import Pool
 import imghdr
 import glob, os, sys
-from multiprocessing import Pool
+import tqdm
 
 # DEFAULT_SIZE = (480, 480)
 DEFAULT_SIZE = (960, 960)
@@ -14,7 +15,7 @@ def down_size(image_path, size=DEFAULT_SIZE):
 def resize_func(input_file):
   if imghdr.what(input_file) not in IMAGE_TYPE:
     return
-  print("Processing: input_file: {} to output_file {}".format(input_file, input_file))
+  # print("Processing: input_file: {} to output_file {}".format(input_file, input_file))
   down_size(input_file)
 
 if __name__ == "__main__":
@@ -30,8 +31,9 @@ if __name__ == "__main__":
       for file in files:
         proc_files.append(os.path.join(input_path, file))
 
-      with Pool(4) as p:
-        p.map(resize_func, proc_files)
+      pool = Pool(processes=4)
+      for _ in tqdm.tqdm(pool.imap_unordered(resize_func, proc_files), total=len(proc_files)):
+        pass
   else:
     # file
     input_file = input_path
